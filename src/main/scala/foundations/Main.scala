@@ -30,11 +30,11 @@ object Main extends App {
 
   val mapExample = Map(1 -> "1", 2 -> "2", 3 -> "3", 1 -> "11")
 
-  println(listExample)
+  //println(listExample)
 
-  println(setExample)
+  //println(setExample)
 
-  println(mapExample)
+  //println(mapExample)
 
   val forExp = for (element <- listExample) yield element + 1
 
@@ -42,11 +42,11 @@ object Main extends App {
 
   val flatMapExp = listExample.flatMap(x => listExample.map(_ + x))
 
-  println(s"y = $y")
+  //println(s"y = $y")
 
-  println(s"z = $z")
+  //println(s"z = $z")
 
-  println(s"whatAmI = $whatAmI")
+  //println(s"whatAmI = $whatAmI")
 
   val y = "Am I Lazy ?"
 
@@ -56,27 +56,27 @@ object Main extends App {
 
   val f11: Int => Int = (x: Int) => x + 1
 
-  println(s"f11 = ${f11(1)}")
+  //println(s"f11 = ${f11(1)}")
 
   def f12(x: Int): Int = x + 1
 
-  println(s"f12 = ${f12(2)}")
+  //println(s"f12 = ${f12(2)}")
 
   val f21: (Int, Int) => Int = (x1: Int, x2: Int) => x1 + x2
 
-  println(s"f21 = ${f21(1, 2)}")
+  //println(s"f21 = ${f21(1, 2)}")
 
   def f22(x1: Int, x2: Int): Int = x1 + x2
 
-  println(s"f22 = ${f22(1, 2)}")
+  //println(s"f22 = ${f22(1, 2)}")
 
   val f31: Int => Int => Int = (x1: Int) => (x2: Int) => x1 + x2
 
-  println(s"f31 = ${f31(1)(2)}")
+  //println(s"f31 = ${f31(1)(2)}")
 
   def f32(x1: Int)(x2: Int): Int = x1 + x2
 
-  println(s"f32 = ${f32(2)(3)}")
+  //println(s"f32 = ${f32(2)(3)}")
 
   //Currying
 
@@ -85,9 +85,9 @@ object Main extends App {
   val f321: Int => Int = f32(3)
   //val f321: Int => Int = f32(3)
 
-  println(s"f311 = ${f311(1)}")
+  //println(s"f311 = ${f311(1)}")
 
-  println(s"f321 = ${f321(1)}")
+  //println(s"f321 = ${f321(1)}")
 
   def funF(x: Int, f: Int => Int): Int = f(x)
 
