@@ -17,6 +17,16 @@ object RecursionFun extends App {
   //Exercises
   def factorial(n: Int): Int = ???
 
+  //Nested Function
+  def nestedFunction(list: List[Int]): Int = {
+
+    def foldRight(l: List[Int], acc: Int = 0): Int = l match {
+      case Nil     => 0
+      case x :: xs => foldRight(xs, acc + x)
+    }
+    foldRight(list)
+  }
+
   def parenthesisBalance(chars: List[Char]): Boolean = ???
 
   //Higher-Order Functions
@@ -25,10 +35,7 @@ object RecursionFun extends App {
                  fun: String => String): String =
     if (check(str)) str else fun(str)
 
-  def sumOfIntRange(a: Int, b: Int, fun: Int => Int): Int = {
-    if (a > b) 0
-    else fun(a) + sumOfIntRange(a + 1, b, fun)
-  }
+  def sumOfIntRange(a: Int, b: Int, fun: Int => Int): Int = ???
 
   def sumOfFactorialRange(a: Int, b: Int): Int = ???
 
@@ -36,5 +43,9 @@ object RecursionFun extends App {
   def sumOfallElements1(list: List[Int], acc: Int): Int = ???
 
   def sumOfallElements2(list: List[Int]): Int = ???
+
+  def reverseList(list: List[Int]): List[Int] = ???
+
+  def addToTheBottom(element: Int, list: List[Int]): List[Int] = ???
 
 }
