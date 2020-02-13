@@ -1,3 +1,0 @@
-package foundations
-
-object FuncitonalWaySpec {}
