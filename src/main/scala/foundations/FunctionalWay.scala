@@ -40,12 +40,13 @@ object FunctionalWay extends App {
   def funF(x: Int, f: Int => Int): Int = f(x)
 
   //Exercises
+  //Create raw functions
+  val sum = ???
+  val subtrahend = ???
+  val product = ???
+  val quotient = ???
 
-  def sum = ???
-  def subtrahend = ???
-  def product = ???
-  def quotient = ???
-
+  //Create functions that has an input a function
   def addition = ???
   def substraction = ???
   def multiplication = ???
@@ -62,6 +63,7 @@ object FunctionalWay extends App {
     case None        => 0
   }
 
+  //Exercise
   def optionExample2(maybeInt: Option[Int],
                      fun: Int => Option[Int]): Option[Int] = ???
 
@@ -76,6 +78,7 @@ object FunctionalWay extends App {
     case head :: tail           => head
   }
 
+  //Exercise
   def listSum2RandomElements(list: List[Int],
                              f: (Int, Int) => Int): Option[Int] = ???
 }

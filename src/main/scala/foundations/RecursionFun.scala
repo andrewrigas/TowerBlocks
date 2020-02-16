@@ -15,6 +15,10 @@ object RecursionFun extends App {
     if (a <= 0) 0 else a + triangular(a - 1)
 
   //Exercises
+  //Calculate Factorial recursively
+  //For example:
+  // n = 4
+  // factorial == 4! => 4 * 3 * 2 * 1
   def factorial(n: Int): Int = ???
 
   //Nested Function
@@ -35,9 +39,21 @@ object RecursionFun extends App {
                  fun: String => String): String =
     if (check(str)) str else fun(str)
 
-  def sumOfIntRange(a: Int, b: Int, fun: Int => Int): Int = ???
+  //Exercise
+  //Apply a function on a range of two values
+  //For example:
+  // a = 1, b = 5
+  // fun = (x1, x2) => x1 + x2
+  //functionOnRange == 1 + 2 + 3 + 4 + 5
+  def aggOnRange(a: Int, b: Int, fun: (Int,Int) => Int): Int = ???
 
-  def sumOfFactorialRange(a: Int, b: Int): Int = ???
+  //Exercise
+  //Apply factorial on a range of values and aggregate them
+  //For example:
+  //a = 1, b = 5
+  //Aggregation f1 + f2
+  //aggFactorialRange == 1! + 2! + 3! + 4! + 5!
+  def aggFactorialRange(a: Int, b: Int): Int = ???
 
   //Collections Rec
   def sumOfallElements1(list: List[Int], acc: Int): Int = ???

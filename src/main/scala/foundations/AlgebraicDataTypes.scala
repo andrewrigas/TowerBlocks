@@ -2,6 +2,14 @@ package foundations
 
 object AlgebraicDataTypes extends App {
 
+  sealed trait Option[+A] {
+    def apply[A1 >: A](value: A1): Option[A1] = if(value == null) None else Some(value)
+  }
+
+  final case class Some[A](value: A) extends Option[A]
+
+  case object None extends Option[Nothing]
+
   sealed abstract class ListExample[+A]
 
   final case class OneOrMore[A](head: A, tail: ListExample[A])
