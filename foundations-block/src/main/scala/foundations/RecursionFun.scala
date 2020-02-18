@@ -1,5 +1,8 @@
 package foundations
 
+import foundations.AlgebraicDataTypes.Tree._
+import foundations.AlgebraicDataTypes._
+
 object RecursionFun extends App {
 
 //  A tail recursion is also a kind of recursion
@@ -25,7 +28,7 @@ object RecursionFun extends App {
   def nestedFunction(list: List[Int]): Int = {
 
     def foldRight(l: List[Int], acc: Int = 0): Int = l match {
-      case Nil     => 0
+      case Nil     => acc
       case x :: xs => foldRight(xs, acc + x)
     }
     foldRight(list)
@@ -45,7 +48,7 @@ object RecursionFun extends App {
   // a = 1, b = 5
   // fun = (x1, x2) => x1 + x2
   //functionOnRange == 1 + 2 + 3 + 4 + 5
-  def aggOnRange(a: Int, b: Int, fun: (Int,Int) => Int): Int = ???
+  def aggOnRange(a: Int, b: Int, fun: (Int, Int) => Int): Int = ???
 
   //Exercise
   //Apply factorial on a range of values and aggregate them
@@ -63,5 +66,16 @@ object RecursionFun extends App {
   def reverseList(list: List[Int]): List[Int] = ???
 
   def addToTheBottom(element: Int, list: List[Int]): List[Int] = ???
+
+  val tree1: Tree[Int] = Branch(Branch(Leaf(1), Leaf(2)), Leaf(4))
+//  val tree2: Tree[Int] = Branch(Branch(Branch(Leaf(1),Leaf(2)),Leaf(4)),Branch(Branch(Branch(Leaf(3),Branch(Leaf(2),Leaf(1))),Leaf(2)),Leaf(4)))
+
+  def calculateSumOfTheTree(tree: Tree[Int]): Int = tree match {
+    case Leaf(value) => value
+    case Branch(leftTree, rightTree) =>
+      calculateSumOfTheTree(leftTree) + calculateSumOfTheTree(rightTree)
+  }
+
+  def mapOnTree[A, B](tree: Tree[A], f: A => B): Tree[B] = ???
 
 }

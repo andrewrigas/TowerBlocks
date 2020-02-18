@@ -2,15 +2,15 @@ package foundations
 
 object FunctionalWay extends App {
 
-  val f11: Int => Int = (x: Int) => x + 1
+  lazy val f11: Int => Int = (x: Int) => x + 1
 
-  //println(s"f11 = ${f11(1)}")
+//  println(s"f11 = ${f11(1)}")
 
   def f12(x: Int): Int = x + 1
 
   //println(s"f12 = ${f12(2)}")
 
-  val f21: (Int, Int) => Int = (x1: Int, x2: Int) => x1 + x2
+  lazy val f21: (Int, Int) => Int = (x1: Int, x2: Int) => x1 + x2
 
   //println(s"f21 = ${f21(1, 2)}")
 
@@ -18,7 +18,7 @@ object FunctionalWay extends App {
 
   //println(s"f22 = ${f22(1, 2)}")
 
-  val f31: Int => Int => Int = (x1: Int) => (x2: Int) => x1 + x2
+  lazy val f31: Int => Int => Int = (x1: Int) => (x2: Int) => x1 + x2
 
   //println(s"f31 = ${f31(1)(2)}")
 
@@ -28,7 +28,7 @@ object FunctionalWay extends App {
 
   //Currying
 
-  val f311 = f31(1)
+  lazy val f311 = f31(1)
 
   //val f321 = f32(3)
   //val f321: Int => Int = f32(3)
@@ -41,10 +41,10 @@ object FunctionalWay extends App {
 
   //Exercises
   //Create raw functions
-  val sum = ???
-  val subtrahend = ???
-  val product = ???
-  val quotient = ???
+//  val sum = ???
+//  val subtrahend = ???
+//  val product = ???
+//  val quotient = ???
 
   //Create functions that has an input a function
   def addition = ???
