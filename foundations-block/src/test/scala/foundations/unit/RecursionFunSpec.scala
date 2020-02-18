@@ -2,6 +2,7 @@ package foundations.unit
 
 import foundations.AlgebraicDataTypes.Tree._
 import foundations.RecursionFun._
+import foundations.base.FoundationsSpecBase
 import org.scalatest.Ignore
 
 class RecursionFunSpec extends FoundationsSpecBase {

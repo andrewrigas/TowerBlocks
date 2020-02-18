@@ -1,6 +1,7 @@
 package foundations.unit
 
 import foundations.FunctionalWay._
+import foundations.base.FoundationsSpecBase
 
 class FunctionalWaySpec extends FoundationsSpecBase {
 
@@ -76,9 +77,10 @@ class FunctionalWaySpec extends FoundationsSpecBase {
         listExample2(list2) shouldBe head
         listExample2(list3) shouldBe head
       }
+
+      "listSum2RandomElements should" in {}
     }
 
-    "listSum2RandomElements should" in {}
   }
 
 }

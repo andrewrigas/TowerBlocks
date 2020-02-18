@@ -1,4 +1,4 @@
-package foundations.unit
+package foundations.base
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
