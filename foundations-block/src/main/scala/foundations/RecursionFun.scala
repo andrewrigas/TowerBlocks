@@ -22,7 +22,7 @@ object RecursionFun extends App {
   //For example:
   // n = 4
   // factorial == 4! => 4 * 3 * 2 * 1
-  def factorial(n: Int): Int = ???
+  def factorial(n: Int): Int = if(n <= 0) 1 else n * factorial(n-1)
 
   //Nested Function
   def nestedFunction(list: List[Int]): Int = {
@@ -56,19 +56,22 @@ object RecursionFun extends App {
   //a = 1, b = 5
   //Aggregation f1 + f2
   //aggFactorialRange == 1! + 2! + 3! + 4! + 5!
-  def aggFactorialRange(a: Int, b: Int): Int = ???
+  def aggFactorialRange(a: Int, b: Int): Int =
+    if(b < a) factorial(b) + aggFactorialRange(a,b+1)
+    else if (b > a) factorial(a) + aggFactorialRange(a+1,b)
+    else factorial(a)
 
   //Collections Rec
-  def sumOfallElements1(list: List[Int], acc: Int): Int = ???
+  def sumOfallElements1(list: List[Int], acc: Int = 0): Int = if(list.isEmpty) acc else sumOfallElements1(list.tail,list.head + acc)
 
-  def sumOfallElements2(list: List[Int]): Int = ???
+  def sumOfallElements2(list: List[Int]): Int = if(list.isEmpty) 0 else list.head + sumOfallElements2(list.tail)
 
   def reverseList(list: List[Int]): List[Int] = ???
 
   def addToTheBottom(element: Int, list: List[Int]): List[Int] = ???
 
   val tree1: Tree[Int] = Branch(Branch(Leaf(1), Leaf(2)), Leaf(4))
-//  val tree2: Tree[Int] = Branch(Branch(Branch(Leaf(1),Leaf(2)),Leaf(4)),Branch(Branch(Branch(Leaf(3),Branch(Leaf(2),Leaf(1))),Leaf(2)),Leaf(4)))
+  val tree2: Tree[Int] = Branch(Branch(Branch(Leaf(1),Leaf(2)),Leaf(4)),Branch(Branch(Branch(Leaf(3),Branch(Leaf(2),Leaf(1))),Leaf(2)),Leaf(4)))
 
   def calculateSumOfTheTree(tree: Tree[Int]): Int = tree match {
     case Leaf(value) => value
@@ -76,6 +79,21 @@ object RecursionFun extends App {
       calculateSumOfTheTree(leftTree) + calculateSumOfTheTree(rightTree)
   }
 
+  //Exercise
+  //Apply a Lambda/Anonymous function on the leafs
+  //For Example
+  // Branch(Branch(Leaf(1),Leaf(2)),Leaf(3))
+  // x => x + 1
+  // Res: Branch(Branch(Leaf(1+1),Leaf(2+1)),Leaf(3+1)
   def mapOnTree[A, B](tree: Tree[A], f: A => B): Tree[B] = ???
+
+  //Bonus
+  //Count how many different ways you can make change for an amount,
+  // given a list of coin denominations.
+  // For example:
+  // There are 3 ways to give change for 4
+  // if you have coins with denomination 1 and 2:
+  // 1+1+1+1, 1+1+2, 2+2.
+  def countChange(money: Int, coins: List[Int]): Int = ???
 
 }

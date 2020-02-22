@@ -78,7 +78,15 @@ class FunctionalWaySpec extends FoundationsSpecBase {
         listExample2(list3) shouldBe head
       }
 
-      "listSum2RandomElements should" in {}
+      "listSum2RandomElements should return the sum of the first 2 elements" in {
+        val list1 = List(3,4)
+        val list2 = List(1)
+        val list3 = Nil
+
+        listSum2RandomElements(list1,(x,y) => x + y) shouldBe Some(7)
+        listSum2RandomElements(list2,(x,y) => x + y) shouldBe None
+        listSum2RandomElements(list3,(x,y) => x + y) shouldBe None
+      }
     }
 
   }

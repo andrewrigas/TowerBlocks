@@ -12,7 +12,7 @@ class FunctionalWayProp
   //Currying
   property("f11 should return Value+1") = forAll { value: Int =>
     f11(value) == value + 1
-    //f11(value) > value - 1
+    //f11(value) > value
   }
 
   property("listExample should always return head or zero") = forAll {

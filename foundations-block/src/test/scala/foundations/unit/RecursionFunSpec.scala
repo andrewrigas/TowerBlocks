@@ -31,10 +31,17 @@ class RecursionFunSpec extends FoundationsSpecBase {
 
     "aggOnRange should" in {}
 
-    "addFactorial should" in {}
+    "aggFactorialRange should return the sum of factorials in a range of 2 values" in {
+      val x1 = 2
+      val x2 = 4
+
+      aggFactorialRange(x1,x2) shouldBe 32
+    }
 
     //sumOfAllElements1
+
     //sumOfAllElements2
+
     //reverseList
     //addToTheBottom
 
@@ -76,6 +83,10 @@ class RecursionFunSpec extends FoundationsSpecBase {
       )
       mapOnTree(tree1, (x: Int) => x + 1) shouldBe tree1Res
       mapOnTree(tree2, (x: Int) => x + 1) shouldBe tree2Res
+    }
+
+    "CountChange should count the different ways you can make change for an amount" in {
+
     }
 
   }

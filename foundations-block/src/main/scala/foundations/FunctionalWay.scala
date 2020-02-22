@@ -64,6 +64,7 @@ object FunctionalWay extends App {
   }
 
   //Exercise
+  //Apply a Lambda/Anonymous Function on an Int and return Option
   def optionExample2(maybeInt: Option[Int],
                      fun: Int => Option[Int]): Option[Int] = ???
 
@@ -79,6 +80,11 @@ object FunctionalWay extends App {
   }
 
   //Exercise
+  //Apply on the first 2 elements in a list a Lambda/Anonymous Function
   def listSum2RandomElements(list: List[Int],
-                             f: (Int, Int) => Int): Option[Int] = ???
+                             f: (Int, Int) => Int): Option[Int] = list match {
+    case x :: y :: xs => Some(f(x,y))
+    case _ => None
+
+  }
 }
