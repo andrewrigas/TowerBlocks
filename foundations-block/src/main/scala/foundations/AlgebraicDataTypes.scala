@@ -13,9 +13,9 @@ object AlgebraicDataTypes extends App {
     case object None extends Option[Nothing]
   }
 
-  object ListExample {
-    sealed abstract class ListExample[+A]
+  sealed abstract class ListExample[+A]
 
+  object ListExample {
     final case class OneOrMore[A](head: A, tail: ListExample[A])
         extends ListExample[A] {}
 
@@ -28,7 +28,6 @@ object AlgebraicDataTypes extends App {
     final case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
 
     final case class Leaf[A](value: A) extends Tree[A]
-
   }
 
   def map[T, A](list: List[T], f: T => A): List[A] = ???

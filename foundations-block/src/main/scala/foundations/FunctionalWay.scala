@@ -27,7 +27,6 @@ object FunctionalWay extends App {
   //println(s"f32 = ${f32(2)(3)}")
 
   //Currying
-
   lazy val f311 = f31(1)
 
   //val f321 = f32(3)
@@ -82,9 +81,5 @@ object FunctionalWay extends App {
   //Exercise
   //Apply on the first 2 elements in a list a Lambda/Anonymous Function
   def listSum2RandomElements(list: List[Int],
-                             f: (Int, Int) => Int): Option[Int] = list match {
-    case x :: y :: xs => Some(f(x,y))
-    case _ => None
-
-  }
+                             f: (Int, Int) => Int): Option[Int] = ???
 }
