@@ -46,11 +46,11 @@ object Foundations extends App {
 
   val flatMapExp = listExample.flatMap(x => listExample.map(_ + x))
 
-  //println(s"y = $y")
-
-  //println(s"z = $z")
-
-  //println(s"whatAmI = $whatAmI")
+//  println(s"y = $y")
+//
+//  println(s"z = $z")
+//
+//  println(s"whatAmI = $whatAmI")
 
   val y = "Am I Lazy ?"
 

@@ -22,7 +22,7 @@ object RecursionFun extends App {
   //For example:
   // n = 4
   // factorial == 4! => 4 * 3 * 2 * 1
-  def factorial(n: Int): Int = if(n <= 0) 1 else n * factorial(n-1)
+  def factorial(n: Int): Int = ???
 
   //Nested Function
   def nestedFunction(list: List[Int]): Int = {

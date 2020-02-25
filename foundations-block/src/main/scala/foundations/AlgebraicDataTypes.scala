@@ -2,6 +2,7 @@ package foundations
 
 object AlgebraicDataTypes extends App {
 
+  //Option Example
   sealed trait Option[+A] {
     def apply[A1 >: A](value: A1): Option[A1] =
       if (value == null) Option.None else Option.Some(value)
@@ -13,6 +14,7 @@ object AlgebraicDataTypes extends App {
     case object None extends Option[Nothing]
   }
 
+  //List Example
   object ListExample {
     sealed abstract class ListExample[+A]
 
@@ -22,6 +24,7 @@ object AlgebraicDataTypes extends App {
     case object Last extends ListExample[Nothing] {}
   }
 
+  //Tree Example
   sealed trait Tree[+A]
 
   object Tree {
@@ -30,6 +33,11 @@ object AlgebraicDataTypes extends App {
     final case class Leaf[A](value: A) extends Tree[A]
 
   }
+
+  //Either Example
+
+
+
 
   def map[T, A](list: List[T], f: T => A): List[A] = ???
 
