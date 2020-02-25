@@ -35,7 +35,7 @@ class RecursionFunSpec extends FoundationsSpecBase {
       val x1 = 2
       val x2 = 4
 
-      aggFactorialRange(x1,x2) shouldBe 32
+      aggFactorialRange(x1, x2) shouldBe 32
     }
 
     //sumOfAllElements1
@@ -62,6 +62,7 @@ class RecursionFunSpec extends FoundationsSpecBase {
       calculateSumOfTheTree(tree2) shouldBe tree2Sum
     }
 
+    //Remove ignore
     "mapOnTree should apply a function to leafs" ignore {
 
       val tree1 = Branch(Branch(Leaf(1), Leaf(2)), Leaf(4))
@@ -85,9 +86,7 @@ class RecursionFunSpec extends FoundationsSpecBase {
       mapOnTree(tree2, (x: Int) => x + 1) shouldBe tree2Res
     }
 
-    "CountChange should count the different ways you can make change for an amount" in {
-
-    }
+    "CountChange should count the different ways you can make change for an amount" in {}
 
   }
 }
