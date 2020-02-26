@@ -24,6 +24,8 @@ object AlgebraicDataTypes extends App {
     val brand = "Johny Walker"
   }
 
+  //Hybrid Example
+
   sealed abstract class Car
 
   final case class BMW(model: String) extends Car
@@ -31,7 +33,6 @@ object AlgebraicDataTypes extends App {
   final case class Jaguar(model: String) extends Car
 
   //Type Class
-
   sealed trait Option[+A] {
     def apply[A1 >: A](value: A1): Option[A1] =
       if (value == null) Option.None else Option.Some(value)
