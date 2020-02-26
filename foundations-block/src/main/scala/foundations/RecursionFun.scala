@@ -79,6 +79,12 @@ object RecursionFun extends App {
       calculateSumOfTheTree(leftTree) + calculateSumOfTheTree(rightTree)
   }
 
+  def map[T, A](list: List[T], f: T => A): List[A] = ???
+
+  def flatMap[T, A](list: List[T], f: T => List[A]): List[A] = ???
+
+  def flatMap[F[_], T, A](fa: F[T], f: T => F[A]): F[A] = ???
+
   //Exercise
   //Apply a Lambda/Anonymous function on the leafs
   //For Example

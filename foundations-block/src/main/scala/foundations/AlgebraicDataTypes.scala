@@ -34,15 +34,7 @@ object AlgebraicDataTypes extends App {
 
   }
 
-  //Either Example
-
-
-
-
-  def map[T, A](list: List[T], f: T => A): List[A] = ???
-
-  def flatMap[T, A](list: List[T], f: T => List[A]): List[A] = ???
-
-  def flatMap[F[_], T, A](fa: F[T], f: T => F[A]): F[A] = ???
+  //Either Exercise
+  //Try to write an Either Data Type
 
 }
