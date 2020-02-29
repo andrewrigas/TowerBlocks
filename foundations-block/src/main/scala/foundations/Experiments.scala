@@ -8,7 +8,7 @@ object Experiments extends App {
 
     final case class Some[A](value: A) extends Option[A]
 
-    case object None[A] extends Option[A]
+    //case object None[A] extends Option[A]
   }
 
   import Option._

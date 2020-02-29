@@ -56,34 +56,40 @@ object RecursionFun extends App {
   //a = 1, b = 5
   //Aggregation f1 + f2
   //aggFactorialRange == 1! + 2! + 3! + 4! + 5!
-  def aggFactorialRange(a: Int, b: Int): Int =
-    if(b < a) factorial(b) + aggFactorialRange(a,b+1)
-    else if (b > a) factorial(a) + aggFactorialRange(a+1,b)
-    else factorial(a)
+  def aggFactorialRange(a: Int, b: Int): Int = ???
 
   //Collections Rec
-  def sumOfallElements1(list: List[Int], acc: Int = 0): Int = if(list.isEmpty) acc else sumOfallElements1(list.tail,list.head + acc)
+  def sumOfallElements1(list: List[Int], acc: Int = 0): Int =
+    if (list.isEmpty) acc else sumOfallElements1(list.tail, list.head + acc)
 
-  def sumOfallElements2(list: List[Int]): Int = if(list.isEmpty) 0 else list.head + sumOfallElements2(list.tail)
+  def sumOfallElements2(list: List[Int]): Int =
+    if (list.isEmpty) 0 else list.head + sumOfallElements2(list.tail)
 
+  //Exercise
+  //Reverse the order of the elements in the list
   def reverseList(list: List[Int]): List[Int] = ???
 
-  def addToTheBottom(element: Int, list: List[Int]): List[Int] = ???
+  //Exercise
+  //Implement the map higher order function
+  //Recursive solution
+  def map[T, A](list: List[T], f: T => A): List[A] = ???
+
+  //Exercise
+  //Implement the flatMap higher order function
+  //Recursive solution
+  def flatMap[T, A](list: List[T], f: T => List[A]): List[A] = ???
 
   val tree1: Tree[Int] = Branch(Branch(Leaf(1), Leaf(2)), Leaf(4))
-  val tree2: Tree[Int] = Branch(Branch(Branch(Leaf(1),Leaf(2)),Leaf(4)),Branch(Branch(Branch(Leaf(3),Branch(Leaf(2),Leaf(1))),Leaf(2)),Leaf(4)))
+  val tree2: Tree[Int] = Branch(
+    Branch(Branch(Leaf(1), Leaf(2)), Leaf(4)),
+    Branch(Branch(Branch(Leaf(3), Branch(Leaf(2), Leaf(1))), Leaf(2)), Leaf(4))
+  )
 
   def calculateSumOfTheTree(tree: Tree[Int]): Int = tree match {
     case Leaf(value) => value
     case Branch(leftTree, rightTree) =>
       calculateSumOfTheTree(leftTree) + calculateSumOfTheTree(rightTree)
   }
-
-  def map[T, A](list: List[T], f: T => A): List[A] = ???
-
-  def flatMap[T, A](list: List[T], f: T => List[A]): List[A] = ???
-
-  def flatMap[F[_], T, A](fa: F[T], f: T => F[A]): F[A] = ???
 
   //Exercise
   //Apply a Lambda/Anonymous function on the leafs
@@ -102,4 +108,7 @@ object RecursionFun extends App {
   // 1+1+1+1, 1+1+2, 2+2.
   def countChange(money: Int, coins: List[Int]): Int = ???
 
+  //Bonus BONUS
+  //Implement a function that calculates all the possible combinaitions
+  //
 }

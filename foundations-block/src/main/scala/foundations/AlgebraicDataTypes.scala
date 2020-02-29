@@ -12,27 +12,23 @@ object AlgebraicDataTypes extends App {
 
   //Product Examples
 
-  sealed trait Spirits {
-    def brand: String
-  }
+  sealed abstract class Spirits
 
-  case object Vodka extends Spirits {
-    val brand = "Absolut"
-  }
+  case object Vodka extends Spirits
 
-  case object Whiskey extends Spirits {
-    val brand = "Johny Walker"
-  }
+  case object Whiskey extends Spirits
 
   //Hybrid Example
 
-  sealed abstract class Car
+  sealed trait Car {
+    def model: String
+  }
 
   final case class BMW(model: String) extends Car
 
   final case class Jaguar(model: String) extends Car
 
-  //Type Class
+  //Type Class or Higher Kinded Type or Parametric Type
   sealed trait Option[+A] {
     def apply[A1 >: A](value: A1): Option[A1] =
       if (value == null) Option.None else Option.Some(value)
@@ -65,7 +61,10 @@ object AlgebraicDataTypes extends App {
 
   }
 
-  //Either Exercise
+  //Either Exercisee
+
+  //Try Exercise
+
   //Try to write an Either Data Type
 
 }

@@ -40,6 +40,10 @@ object Foundations extends App {
 
   //println(mapExample)
 
+  for (i <- 1 to 10) {
+    i
+  }
+
   val forExp = for (element <- listExample) yield element + 1
 
   val mapExp = listExample.map(x => x + 1)

@@ -64,8 +64,8 @@ object FunctionalWay extends App {
 
   //Exercise
   //Apply a Lambda/Anonymous Function on an Int and return Option
-  def optionExample2(maybeInt: Option[Int],
-                     fun: Int => Option[Int]): Option[Int] = ???
+  def flatMapOption(maybeInt: Option[Int],
+                    fun: Int => Option[Int]): Option[Int] = ???
 
   def listExample(list: List[Int]) = list match {
     case Nil          => 0
