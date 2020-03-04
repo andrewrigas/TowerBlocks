@@ -25,12 +25,14 @@ object Foundations extends App {
   //Only one instance
 
   //Collections
-  val listExample: List[Int] = List(1, 2, 34, 5, 6)
+  val listExample: List[Int] = List(1, 2, 3)
+
+  val listExample2: List[Int] = 1 :: 2 :: 3 :: Nil
 
   val setExample: Set[Int] = Set(1, 2, 3, 4, 3, 5)
 
   val mapExample: Map[Int, String] =
-    Map(1 -> "1", 2 -> "2", 3 -> "3", 1 -> "11")
+    Map(1 -> "1", 2 -> "2", (3, "3"), (1, "11"))
 
   val rangeExample: Range = 1 to 10
 
@@ -50,10 +52,14 @@ object Foundations extends App {
 
   val flatMapExp = listExample.flatMap(x => listExample.map(_ + x))
 
-//  println(s"y = $y")
-//
+  val flattenTheList = List(List(1, 2, 3), List(4, 5), List(6, 7))
+
+  val flattenList: List[Int] = flattenTheList.flatten
+
+  //  println(s"y = $y")
+
 //  println(s"z = $z")
-//
+
 //  println(s"whatAmI = $whatAmI")
 
   val y = "Am I Lazy ?"

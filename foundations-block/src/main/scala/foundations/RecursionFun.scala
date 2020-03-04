@@ -108,7 +108,23 @@ object RecursionFun extends App {
   // 1+1+1+1, 1+1+2, 2+2.
   def countChange(money: Int, coins: List[Int]): Int = ???
 
-  //Bonus BONUS
-  //Implement a function that calculates all the possible combinaitions
-  //
+  //MEGA BONUS
+  //Implement a function that calculates all the possible combinations of a list with chars
+  //For example
+  //List(a,b,c)
+  //List(List(a,b,c),List(a,b),List(a,c),List(a),List(b,c),List(b),List(c),List())
+
+  def combinationsCal(list: List[Char]): Set[List[Char]] = {
+    list match {
+      case Nil         => Set(List())
+      case head :: Nil => Set(List(head))
+      case head :: second :: tail =>
+        (Set(list) ++ combinationsCal(head :: tail)) ++ combinationsCal(
+          second :: tail
+        ) ++ combinationsCal(head :: list.tail.dropRight(1))
+    }
+  }
+
+  val comb = combinationsCal(List('a', 'b', 'c'))
+  println(comb + "  " + comb.size)
 }

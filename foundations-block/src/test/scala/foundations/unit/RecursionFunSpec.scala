@@ -31,7 +31,7 @@ class RecursionFunSpec extends FoundationsSpecBase {
 
     "aggOnRange should" in {}
 
-    "aggFactorialRange should return the sum of factorials in a range of 2 values" in {
+    "aggFactorialRange should return the sum of factorials in a range of 2 values" ignore {
       val x1 = 2
       val x2 = 4
 
