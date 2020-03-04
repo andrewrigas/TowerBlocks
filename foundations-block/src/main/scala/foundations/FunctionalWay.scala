@@ -36,6 +36,7 @@ object FunctionalWay extends App {
 
   //println(s"f321 = ${f321(1)}")
 
+  //Higher Order Function
   def funF(x: Int, f: Int => Int): Int = f(x)
 
   //Exercises
