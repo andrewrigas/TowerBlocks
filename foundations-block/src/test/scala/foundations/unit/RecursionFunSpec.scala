@@ -1,9 +1,8 @@
 package foundations.unit
 
-import foundations.AlgebraicDataTypes.Tree._
-import foundations.RecursionFun._
 import foundations.base.FoundationsSpecBase
-import org.scalatest.Ignore
+import foundations.Exercises.B3.RecursionFun.RecursionFun._
+import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree._
 
 class RecursionFunSpec extends FoundationsSpecBase {
 

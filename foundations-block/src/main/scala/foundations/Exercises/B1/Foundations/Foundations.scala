@@ -1,4 +1,4 @@
-package foundations
+package foundations.Exercises.B1.Foundations
 
 object Foundations extends App {
 

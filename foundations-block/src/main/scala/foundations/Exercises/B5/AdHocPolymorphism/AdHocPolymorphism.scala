@@ -1,6 +1,6 @@
-package foundations
+package foundations.Exercises.B5.AdHocPolymorphism
 
-import foundations.AdHocPolymorphism.Human.{Maria, Trump}
+import AdHocPolymorphism.Human.{Maria, Trump}
 
 object AdHocPolymorphism extends App {
 
@@ -9,6 +9,18 @@ object AdHocPolymorphism extends App {
   def funcConcatStringInt(str: String)(implicit value: Int): String = {
     str + value
   }
+
+  println(funcConcatStringInt("Ball "))
+
+  implicit val maybeInt: Option[Int] = Some(3)
+
+  def funcGetOptionImplicit(value: Int)(implicit maybeInt: Option[Int]): Int =
+    maybeInt match {
+      case Some(succ) => succ + value
+      case None       => value
+    }
+
+//  println(funcGetOptionImplicit(3))
 
   sealed abstract class Human {
     def name: String
@@ -24,6 +36,7 @@ object AdHocPolymorphism extends App {
     }
   }
 
+  //Associate functionality with types
   trait TypeClass[A] {
     def whatIsMyType: String
   }
@@ -56,9 +69,9 @@ object AdHocPolymorphism extends App {
     typeClass.whatIsMyType
   }
 
-  println(getTheType[String])
-  println(getTheType[Int])
-  println(getTheType[Boolean])
+//  println(getTheType[String])
+//  println(getTheType[Int])
+//  println(getTheType[Boolean])
 
   trait Food[A] {
     def iAte: String
@@ -80,7 +93,8 @@ object AdHocPolymorphism extends App {
     "My name is " + getTheType[A] + " and I ate " + food.iAte
   }
 
-  println(whoAmIwhatDidIAte[Maria])
-  println(whoAmIwhatDidIAte[Trump])
+//  println(whoAmIwhatDidIAte[Maria])
+//  println(whoAmIwhatDidIAte[Trump])
+  //Create an Ad Hoc Polymorphism
 
 }

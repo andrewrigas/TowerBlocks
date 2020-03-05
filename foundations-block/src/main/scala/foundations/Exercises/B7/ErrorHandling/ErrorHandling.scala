@@ -1,4 +1,4 @@
-package foundations
+package foundations.Exercises.B7.ErrorHandling
 
 import scala.util.Try
 

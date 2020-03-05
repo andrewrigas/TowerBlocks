@@ -1,4 +1,4 @@
-package foundations
+package foundations.Exercises.B2.FunctionalWay
 
 object FunctionalWay extends App {
 

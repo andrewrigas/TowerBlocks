@@ -1,4 +1,4 @@
-package foundations
+package foundations.Exercises.B4.AlgebraicDataTypes
 
 object AlgebraicDataTypes extends App {
 

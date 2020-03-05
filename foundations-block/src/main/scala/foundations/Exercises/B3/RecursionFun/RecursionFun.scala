@@ -1,7 +1,7 @@
-package foundations
+package foundations.Exercises.B3.RecursionFun
 
-import foundations.AlgebraicDataTypes.Tree._
-import foundations.AlgebraicDataTypes._
+import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree
+import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree._
 
 object RecursionFun extends App {
 
@@ -62,8 +62,11 @@ object RecursionFun extends App {
   def sumOfallElements1(list: List[Int], acc: Int = 0): Int =
     if (list.isEmpty) acc else sumOfallElements1(list.tail, list.head + acc)
 
-  def sumOfallElements2(list: List[Int]): Int =
-    if (list.isEmpty) 0 else list.head + sumOfallElements2(list.tail)
+  //With Pattern Matching
+  def sumOfallElements2(list: List[Int]): Int = list match {
+    case Nil          => 0
+    case head :: tail => head + sumOfallElements2(tail)
+  }
 
   //Exercise
   //Reverse the order of the elements in the list
