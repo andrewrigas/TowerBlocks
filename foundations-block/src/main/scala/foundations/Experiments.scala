@@ -31,7 +31,7 @@ object Experiments extends App {
   //I can accept superclasses
   object Option2 {
 
-    final case class Some2[-A](value: A) extends Option2[A]
+    final case class Some2[A](value: A) extends Option2[A]
 
     case object None extends Option2[AnyVal]
   }

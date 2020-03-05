@@ -21,7 +21,7 @@ class FunctionalWayProp
     //list.isEmpty ==> (listExample(list) == 0)
   }
 
-//  property("calculator should passed with the Integer Range") =
+//  property("calculator should passed within this Integer Range") =
 //    forAll(integerRangeGen) { (x1: Int, x2: Int) =>
 //      ???
 //    }
