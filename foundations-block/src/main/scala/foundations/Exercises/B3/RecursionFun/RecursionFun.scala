@@ -75,7 +75,7 @@ object RecursionFun extends App {
   //Exercise
   //Implement the map higher order function
   //Recursive solution
-  def map[T, A](list: List[T], f: T => A): List[A] = ???
+  def map(list: List[Int], f: Int => Int): List[Int] = ???
 
   //Exercise
   //Implement the flatMap higher order function
