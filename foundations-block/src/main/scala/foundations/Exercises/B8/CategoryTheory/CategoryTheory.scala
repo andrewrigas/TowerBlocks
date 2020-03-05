@@ -1,4 +1,4 @@
-package foundations
+package foundations.Exercises.B8.CategoryTheory
 
 object CategoryTheory extends App {
 
@@ -6,7 +6,7 @@ object CategoryTheory extends App {
     def identity: A
   }
 
-  trait Semigroup[A] extends Monoid[A]{
+  trait Semigroup[A] extends Monoid[A] {
     def combine(a1: A, a2: A): A
   }
 
@@ -45,9 +45,11 @@ object CategoryTheory extends App {
 
     def flatten[A](ffa: F[F[A]]): F[A] = flatMap(ffa)(identity)
 
-    override def ap[A, B](fa: F[A])(ff: F[A => B]): F[B] = flatMap(ff)(a => map(fa)(a))
+    override def ap[A, B](fa: F[A])(ff: F[A => B]): F[B] =
+      flatMap(ff)(a => map(fa)(a))
 
-    override def map[A, B](fa: F[A])(f: A => B): F[B] = flatMap(fa)(a => pure(f(a)))
+    override def map[A, B](fa: F[A])(f: A => B): F[B] =
+      flatMap(fa)(a => pure(f(a)))
   }
 
   sealed abstract class Maybe[+A]
@@ -62,63 +64,75 @@ object CategoryTheory extends App {
     def append[B >: A](other: ZeroOrMore[B]): ZeroOrMore[B]
   }
 
-  final case class OneOrMore[A](head: A, tail: ZeroOrMore[A]) extends ZeroOrMore[A] {
-    override def append[B >: A](other: ZeroOrMore[B]): ZeroOrMore[B] = OneOrMore(head, tail.append(other))
+  final case class OneOrMore[A](head: A, tail: ZeroOrMore[A])
+      extends ZeroOrMore[A] {
+    override def append[B >: A](other: ZeroOrMore[B]): ZeroOrMore[B] =
+      OneOrMore(head, tail.append(other))
   }
 
   case object Zero extends ZeroOrMore[Nothing] {
-    override def append[B >: Nothing](other: ZeroOrMore[B]): ZeroOrMore[B] = other
+    override def append[B >: Nothing](other: ZeroOrMore[B]): ZeroOrMore[B] =
+      other
   }
 
   implicit val maybeFunctor = new Functor[Maybe] {
     override def map[A, B](fa: Maybe[A])(f: A => B): Maybe[B] = fa match {
       case Just(a) => Just(f(a))
-      case Empty => Empty
+      case Empty   => Empty
     }
   }
 
   implicit val zeroOrMoreFunctor = new Functor[ZeroOrMore] {
-    override def map[A, B](fa: ZeroOrMore[A])(f: A => B): ZeroOrMore[B] = fa match {
-      case OneOrMore(head, tail) => OneOrMore(f(head), map(tail)(f))
-      case Zero => Zero
-    }
+    override def map[A, B](fa: ZeroOrMore[A])(f: A => B): ZeroOrMore[B] =
+      fa match {
+        case OneOrMore(head, tail) => OneOrMore(f(head), map(tail)(f))
+        case Zero                  => Zero
+      }
   }
 
   implicit val maybeApplicative = new Applicative[Maybe] {
     override def pure[A](a: A): Maybe[A] = Just(a)
 
-    override def ap[A, B](fa: Maybe[A])(ff: Maybe[A => B]): Maybe[B] = (fa, ff) match {
-      case (Just(a), Just(f)) => pure(f(a))
-      case _ => Empty
-    }
+    override def ap[A, B](fa: Maybe[A])(ff: Maybe[A => B]): Maybe[B] =
+      (fa, ff) match {
+        case (Just(a), Just(f)) => pure(f(a))
+        case _                  => Empty
+      }
   }
 
   implicit val zeroOrMoreApplicative = new Applicative[ZeroOrMore] {
     override def pure[A](a: A): ZeroOrMore[A] = OneOrMore(a, Zero)
 
-    override def ap[A, B](fa: ZeroOrMore[A])(ff: ZeroOrMore[A => B]): ZeroOrMore[B] = (fa, ff) match {
-      case (Zero, Zero) => Zero
+    override def ap[A, B](
+      fa: ZeroOrMore[A]
+    )(ff: ZeroOrMore[A => B]): ZeroOrMore[B] = (fa, ff) match {
+      case (Zero, Zero)                    => Zero
       case (Zero, OneOrMore(fHead, fTail)) => Zero
-      case (OneOrMore(aHead, _), OneOrMore(fHead, Zero)) => OneOrMore(fHead(aHead), Zero)
+      case (OneOrMore(aHead, _), OneOrMore(fHead, Zero)) =>
+        OneOrMore(fHead(aHead), Zero)
       case (OneOrMore(aHead, aTail), OneOrMore(fHead, fTail)) => ???
-      case _ => Zero
+      case _                                                  => Zero
     }
   }
 
   implicit val maybeMonad = new Monad[Maybe] {
-    override def flatMap[A, B](fa: Maybe[A])(f: A => Maybe[B]): Maybe[B] = fa match {
-      case Just(a) => f(a)
-      case Empty => Empty
-    }
+    override def flatMap[A, B](fa: Maybe[A])(f: A => Maybe[B]): Maybe[B] =
+      fa match {
+        case Just(a) => f(a)
+        case Empty   => Empty
+      }
+
     override def pure[A](a: A): Maybe[A] = Just(a)
   }
 
   implicit val zeroOrMore = new Monad[ZeroOrMore] {
-    override def flatMap[A, B](fa: ZeroOrMore[A])(f: A => ZeroOrMore[B]): ZeroOrMore[B] = fa match {
-      case Zero => Zero
+    override def flatMap[A, B](
+      fa: ZeroOrMore[A]
+    )(f: A => ZeroOrMore[B]): ZeroOrMore[B] = fa match {
+      case Zero                  => Zero
       case OneOrMore(head, tail) => f(head).append(flatMap(tail)(f))
     }
 
-    override def pure[A](a: A): ZeroOrMore[A] = OneOrMore(a,Zero)
+    override def pure[A](a: A): ZeroOrMore[A] = OneOrMore(a, Zero)
   }
 }

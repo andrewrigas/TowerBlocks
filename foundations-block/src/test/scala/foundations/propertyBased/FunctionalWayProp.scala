@@ -1,9 +1,9 @@
 package foundations.propertyBased
-import foundations.FunctionalWay._
+
 import foundations.base.FoundationsPropBase
-import org.scalacheck.Prop.forAll
+import foundations.Exercises.B2.FunctionalWay.FunctionalWay._
+import org.scalacheck.Prop.{forAll, propBoolean}
 import org.scalacheck.Properties
-import org.scalacheck.Prop.propBoolean
 
 class FunctionalWayProp
     extends Properties("Functional")
@@ -12,7 +12,7 @@ class FunctionalWayProp
   //Currying
   property("f11 should return Value+1") = forAll { value: Int =>
     f11(value) == value + 1
-    //f11(value) > value
+  //f11(value) > value
   }
 
   property("listExample should always return head or zero") = forAll {
@@ -21,7 +21,7 @@ class FunctionalWayProp
     //list.isEmpty ==> (listExample(list) == 0)
   }
 
-//  property("calculator should passed with the Integer Range") =
+//  property("calculator should passed within this Integer Range") =
 //    forAll(integerRangeGen) { (x1: Int, x2: Int) =>
 //      ???
 //    }

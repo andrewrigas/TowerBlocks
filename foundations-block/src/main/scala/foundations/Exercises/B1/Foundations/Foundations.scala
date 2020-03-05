@@ -1,4 +1,4 @@
-package foundations
+package foundations.Exercises.B1.Foundations
 
 object Foundations extends App {
 
@@ -29,11 +29,14 @@ object Foundations extends App {
 
   val listExample2: List[Int] = 1 :: 2 :: 3 :: Nil
 
+  //Unique Elements
   val setExample: Set[Int] = Set(1, 2, 3, 4, 3, 5)
 
+  //Map(key -> value) Unique Key , last key overrides the value of first one
   val mapExample: Map[Int, String] =
     Map(1 -> "1", 2 -> "2", (3, "3"), (1, "11"))
 
+  //Create a range, Useful for for-loops
   val rangeExample: Range = 1 to 10
 
   //println(listExample)
@@ -50,11 +53,17 @@ object Foundations extends App {
 
   val mapExp = listExample.map(x => x + 1)
 
+//  println(mapExp + "  " + forExp)
+
   val flatMapExp = listExample.flatMap(x => listExample.map(_ + x))
+
+//  println(flatMapExp)
 
   val flattenTheList = List(List(1, 2, 3), List(4, 5), List(6, 7))
 
   val flattenList: List[Int] = flattenTheList.flatten
+
+  //  println(flattenList)
 
   //  println(s"y = $y")
 

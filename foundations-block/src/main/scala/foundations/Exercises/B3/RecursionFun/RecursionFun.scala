@@ -1,7 +1,7 @@
-package foundations
+package foundations.Exercises.B3.RecursionFun
 
-import foundations.AlgebraicDataTypes.Tree._
-import foundations.AlgebraicDataTypes._
+import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree
+import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree._
 
 object RecursionFun extends App {
 
@@ -62,8 +62,11 @@ object RecursionFun extends App {
   def sumOfallElements1(list: List[Int], acc: Int = 0): Int =
     if (list.isEmpty) acc else sumOfallElements1(list.tail, list.head + acc)
 
-  def sumOfallElements2(list: List[Int]): Int =
-    if (list.isEmpty) 0 else list.head + sumOfallElements2(list.tail)
+  //With Pattern Matching
+  def sumOfallElements2(list: List[Int]): Int = list match {
+    case Nil          => 0
+    case head :: tail => head + sumOfallElements2(tail)
+  }
 
   //Exercise
   //Reverse the order of the elements in the list
@@ -112,24 +115,11 @@ object RecursionFun extends App {
   //Implement a function that calculates all the possible combinations of a list with chars
   //For example
   //List(a,b,c)
-  //Set(List(a,b,c),List(a,b),List(a,c),List(a),List(b,c),List(b),List(c))
-  def combinationsCal(list: List[Char]): Set[List[Char]] = ???
+  //List(List(a,b,c),List(a,b),List(a,c),List(a),List(b,c),List(b),List(c),List())
 
+  def combinationsCal(list: List[Char]): List[List[Char]] = ???
 
   val comb = combinationsCal(List('a', 'b', 'c'))
   println(comb + "  " + comb.size)
-
-  //Solution
-//  {
-//    list match {
-//      case Nil         => Set(List())
-//      case head :: Nil => Set(List(head))
-//      case head :: second :: tail =>
-//        (Set(list) ++ combinationsCal(head :: tail)) ++ combinationsCal(
-//          second :: tail
-//        ) ++ combinationsCal(head :: list.tail.dropRight(1))
-//    }
-//  }
-//
 
 }

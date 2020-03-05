@@ -1,4 +1,4 @@
-package foundations
+package foundations.Exercises.B4.AlgebraicDataTypes
 
 object AlgebraicDataTypes extends App {
 
@@ -61,10 +61,8 @@ object AlgebraicDataTypes extends App {
 
   }
 
-  //Either Exercisee
+  //Either Exercise
 
   //Try Exercise
-
-  //Try to write an Either Data Type
 
 }

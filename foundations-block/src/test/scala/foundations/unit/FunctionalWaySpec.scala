@@ -1,7 +1,7 @@
 package foundations.unit
 
-import foundations.FunctionalWay._
 import foundations.base.FoundationsSpecBase
+import foundations.Exercises.B2.FunctionalWay.FunctionalWay._
 
 class FunctionalWaySpec extends FoundationsSpecBase {
 
