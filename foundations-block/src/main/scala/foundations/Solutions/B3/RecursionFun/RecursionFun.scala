@@ -8,7 +8,8 @@ object RecursionFun extends App {
   //List(a,b,c)
   //List(List(a,b,c),List(a,b),List(a,c),List(a),List(b,c),List(b),List(c),List())
 
-  def combinationsCal(list: List[Char]): List[List[Char]] = {
+  //Keep in mind this is my solution you might code better one
+  def combinationsCal(charList: List[Char]): List[List[Char]] = {
 
     def recursionCombin(list: List[Char]): Set[List[Char]] = {
       list match {
@@ -21,7 +22,7 @@ object RecursionFun extends App {
       }
     }
 
-    recursionCombin(list).toList
+    recursionCombin(charList).toList
   }
 
   val comb = combinationsCal(List('a', 'b', 'c'))
