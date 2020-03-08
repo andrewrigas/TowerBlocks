@@ -39,18 +39,18 @@ object FunctionalWay extends App {
   //Higher Order Function
   def funF(x: Int, f: Int => Int): Int = f(x)
 
-  //Exercises
-  //Create raw functions
-//  val sum = ???
-//  val subtrahend = ???
-//  val product = ???
-//  val quotient = ???
+//  println(funF(5 , x => x + 1))
+//  println(funF(5 , f11))
 
-  //Create functions that has an input a function
-  def addition = ???
-  def substraction = ???
-  def multiplication = ???
-  def division = ???
+  //Exercises
+  //Create raw functions that takes 2 parameters and perform an operation
+  val sum = ???
+  val subtrahend = ???
+  val product = ???
+  val quotient = ???
+
+  //Create a function that has input of 2 Parameters and function
+  def calculator = ???
 
   //println(s"Addition: ")
   //println(s"Subtraction:")
@@ -73,6 +73,7 @@ object FunctionalWay extends App {
     case head :: tail => head
   }
 
+  //Pattern Matching with order
   def listExample2(list: List[Int]): Int = list match {
     case Nil                    => 0
     case head :: second :: tail => head
@@ -83,4 +84,5 @@ object FunctionalWay extends App {
   //Apply on the first 2 elements in a list a Lambda/Anonymous Function
   def listSum2RandomElements(list: List[Int],
                              f: (Int, Int) => Int): Option[Int] = ???
+
 }

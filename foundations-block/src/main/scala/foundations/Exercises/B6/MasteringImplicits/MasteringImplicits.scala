@@ -2,13 +2,57 @@ package foundations.Exercises.B6.MasteringImplicits
 
 object MasteringImplicits extends App {
 
-  final case class Summoner(name: String)
-
-  implicit object Summoner{
-    def apply(name: String) = new Summoner(name)
+  sealed trait Events {
+    def value: String
   }
 
-  def createSummoner(implicit summ: Summoner.type) = summ("Andreas")
+  trait EventsSummoner[T] {
+    def apply(value: String): T
+    def desApply(value: String): T
+  }
+
+  final case class PlayEvents(value: String) extends Events
+
+  implicit object PlayEvents extends EventsSummoner[PlayEvents] { // Summoner
+    //Apply method is the constructor in Scala
+    def apply(value: String): PlayEvents = new PlayEvents(value)
+
+    //Smart constructor
+    override def desApply(value: String): PlayEvents =
+      new PlayEvents(value.toUpperCase)
+  }
+
+  final case class StopEvents(value: String) extends Events
+
+  implicit object StopEvents extends EventsSummoner[StopEvents] { // Summoner
+    //Apply method is the constructor in Scala
+    def apply(value: String): StopEvents = new StopEvents(value)
+
+    //Smart constructor
+    override def desApply(value: String): StopEvents =
+      new StopEvents(value.toUpperCase)
+  }
+
+  final case class ClickEvents(value: String) extends Events
+
+  implicit object ClickEvents extends EventsSummoner[ClickEvents] { // Summoner
+    //Apply method is the constructor in Scala
+    def apply(value: String): ClickEvents = new ClickEvents(value)
+
+    //Smart constructor
+    override def desApply(value: String): ClickEvents =
+      new ClickEvents(value.toUpperCase)
+  }
+
+  def deserialize[A <: Events](value: String)(
+    implicit summoner: EventsSummoner[A]
+  ): A = summoner.desApply(value)
+
+  val desPlayEvent = deserialize[PlayEvents]("PlaYeVent")
+  val desStopEvent = deserialize[StopEvents]("StoPEVEnt")
+  val desClickEvent = deserialize[ClickEvents]("cliCkEvent")
+
+  println(desPlayEvent, desStopEvent, desClickEvent)
 
   object TypeHelpers {
 
@@ -16,16 +60,16 @@ object MasteringImplicits extends App {
       def addFour: Int = value + 4
       def factorial: Long = {
         def fac(x: Long): Long = {
-          if(x == 0) 1
-          else if(x > 0) x * fac(x-1)
-          else x * fac(x+1)
+          if (x == 0) 1
+          else if (x > 0) x * fac(x - 1)
+          else x * fac(x + 1)
         }
         fac(value.toLong)
       }
     }
 
     implicit class TypeHelp[+T](x: T) {
-      def map[B](f: T => B) = f(x)
+      def map[B](f: T => B): B = f(x)
     }
   }
 
@@ -70,6 +114,9 @@ object MasteringImplicits extends App {
 
   def giveMeEvent[A](implicit singleEvent: EventAction[A]): EventAction[A] =
     singleEvent
+
+//  def giveMeEventAlt[A : EventAction]: EventAction[A] =
+//    implicitly[EventAction[A]]
 
   val eventMsgPlayEvent = giveMeEvent[PlayEvent]
 

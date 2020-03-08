@@ -16,8 +16,8 @@ object AdHocPolymorphism extends App {
 
   def funcGetOptionImplicit(value: Int)(implicit maybeInt: Option[Int]): Int =
     maybeInt match {
-      case Some(succ) => succ + value
-      case None       => value
+      case Some(suc) => suc + value
+      case None      => value
     }
 
 //  println(funcGetOptionImplicit(3))
@@ -37,36 +37,36 @@ object AdHocPolymorphism extends App {
   }
 
   //Associate functionality with types
-  trait TypeClass[A] {
-    def whatIsMyType: String
+  trait Decoder[A] { self =>
+    def decodeType: String
   }
 
-  object TypeClass {
+  object Decoder {
     import Human._
 
-    implicit val typeString = new TypeClass[String] {
-      val whatIsMyType: String = "String"
+    implicit val typeString = new Decoder[String] {
+      val decodeType: String = "String"
     }
 
-    implicit val typeInt = new TypeClass[Int] {
-      val whatIsMyType: String = "Int"
+    implicit val typeInt = new Decoder[Int] {
+      val decodeType: String = "Int"
     }
 
-    implicit val typeBool = new TypeClass[Boolean] {
-      val whatIsMyType: String = "Bool"
+    implicit val typeBool = new Decoder[Boolean] {
+      val decodeType: String = "Bool"
     }
 
-    implicit val typeTrump = new TypeClass[Trump] {
-      val whatIsMyType: String = "Trump"
+    implicit val typeTrump = new Decoder[Trump] {
+      val decodeType: String = "Trump"
     }
 
-    implicit val typeMaria = new TypeClass[Maria] {
-      val whatIsMyType: String = "Maria"
+    implicit val typeMaria = new Decoder[Maria] {
+      val decodeType: String = "Maria"
     }
   }
 
-  def getTheType[A](implicit typeClass: TypeClass[A]): String = {
-    typeClass.whatIsMyType
+  def getTheType[A](implicit typeClass: Decoder[A]): String = {
+    typeClass.decodeType
   }
 
 //  println(getTheType[String])
@@ -89,7 +89,7 @@ object AdHocPolymorphism extends App {
   }
 
   def whoAmIwhatDidIAte[A](implicit food: Food[A],
-                           typeClass: TypeClass[A]): String = {
+                           typeClass: Decoder[A]): String = {
     "My name is " + getTheType[A] + " and I ate " + food.iAte
   }
 

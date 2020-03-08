@@ -24,6 +24,7 @@ object VariancesExp extends App {
     case object None extends Option1[Nothing]
   }
 
+  // +A make this statement legal => Nothing is a subtype of Int
   val maybeValue1: Option1[Int] = Option1.None
 
   sealed trait Option2[-A] // An invariant class
@@ -36,5 +37,6 @@ object VariancesExp extends App {
     case object None extends Option2[AnyVal]
   }
 
+  // -A make this legal statement legal => AnyVal is a supertype of Int
   val maybeValue: Option2[Int] = Option2.None
 }

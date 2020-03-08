@@ -80,7 +80,7 @@ object RecursionFun extends App {
   //Exercise
   //Implement the flatMap higher order function
   //Recursive solution
-  def flatMap[T, A](list: List[T], f: T => List[A]): List[A] = ???
+  def flatMap(list: List[Int], f: Int => List[Int]): List[Int] = ???
 
   val tree1: Tree[Int] = Branch(Branch(Leaf(1), Leaf(2)), Leaf(4))
   val tree2: Tree[Int] = Branch(
@@ -100,7 +100,7 @@ object RecursionFun extends App {
   // Branch(Branch(Leaf(1),Leaf(2)),Leaf(3))
   // x => x + 1
   // Res: Branch(Branch(Leaf(1+1),Leaf(2+1)),Leaf(3+1)
-  def mapOnTree[A, B](tree: Tree[A], f: A => B): Tree[B] = ???
+  def mapOnTree(tree: Tree[Int], f: Int => Int): Tree[Int] = ???
 
   //Bonus
   //Count how many different ways you can make change for an amount,
@@ -115,7 +115,7 @@ object RecursionFun extends App {
   //Implement a function that calculates all the possible combinations of a list with chars
   //For example
   //List(a,b,c)
-  //List(List(a,b,c),List(a,b),List(a,c),List(a),List(b,c),List(b),List(c),List())
+  //List(List(a,b,c),List(a,b),List(a,c),List(a),List(b,c),List(b),List(c),List()) Empty list is a combination as well
 
   def combinationsCal(list: List[Char]): List[List[Char]] = ???
 
