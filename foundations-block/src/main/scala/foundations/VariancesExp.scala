@@ -1,6 +1,6 @@
 package foundations
 
-object Experiments extends App {
+object VariancesExp extends App {
 
   sealed trait Option[A] // An invariant class
 
