@@ -3,29 +3,33 @@ package foundations.Exercises.B8.CategoryTheory
 object CategoryTheory extends App {
 
   trait Monoid[A] {
+    def value: A
     def identity: A
+    def compose(x: A): A
   }
 
-  trait Semigroup[A] extends Monoid[A] {
-    def combine(a1: A, a2: A): A
+  implicit val intSemiGroupSum = new Monoid[Int] {
+    val value: Int = 10
+
+    override def compose(x: Int): Int = this.value + x
+
+    override def identity: Int = this.value + 0
   }
 
-  implicit val intSemiGroupSum = new Semigroup[Int] {
-    override def combine(a1: Int, a2: Int): Int = a1 + a2
+  implicit val intSemiGroupProduct = new Monoid[Int] {
+    val value: Int = 10
 
-    override def identity: Int = 0
+    override def compose(x: Int): Int = this.value * x
+
+    override def identity: Int = this.value * 1
   }
 
-  implicit val intSemiGroupProduct = new Semigroup[Int] {
-    override def combine(a1: Int, a2: Int): Int = a1 * a2
+  implicit val stringSemiGroupConcat = new Monoid[String] {
+    val value: String = "Hello"
 
-    override def identity: Int = 1
-  }
+    override def compose(x: String): String = this.value + x
 
-  implicit val stringSemiGroupConcat = new Semigroup[String] {
-    override def combine(a1: String, a2: String): String = s"$a1$a2"
-
-    override def identity: String = ""
+    override def identity: String = this.value + ""
   }
 
   trait Functor[F[_]] {
