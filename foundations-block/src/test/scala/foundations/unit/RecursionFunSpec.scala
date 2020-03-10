@@ -28,7 +28,14 @@ class RecursionFunSpec extends FoundationsSpecBase {
       hashString("", x => x.isEmpty, x => x + "hashed") shouldBe ""
     }
 
-    "aggOnRange should" in {}
+    "aggOnRange should" ignore {
+      val min = 1
+      val max = 3
+      val lambda: (Int, Int) => Int = (a, b) => a + b
+
+      aggOnRange(min, max, lambda) shouldBe 6
+      aggOnRange(max, min, lambda) shouldBe 6
+    }
 
     "aggFactorialRange should return the sum of factorials in a range of 2 values" ignore {
       val x1 = 2

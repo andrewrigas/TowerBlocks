@@ -71,6 +71,13 @@ object MasteringImplicits extends App {
     implicit class TypeHelp[+T](x: T) {
       def map[B](f: T => B): B = f(x)
     }
+
+    implicit class BoolToEither(bool: Boolean) {
+      import foundations.Solutions.B4.AlgebraicDataTypes.AlgebraicDataTypes.EitherB._
+      import foundations.Solutions.B4.AlgebraicDataTypes.AlgebraicDataTypes.EitherB
+      def fold[A, B](left: A, right: B): EitherB[A, B] =
+        if (bool) RightB(right) else LeftB(left)
+    }
   }
 
 //  import TypeHelpers._
@@ -84,6 +91,12 @@ object MasteringImplicits extends App {
 //
 //  val d = 4.map(x => x + 1)
 //  println(d)
+
+//  val boolTrue = true
+//  val boolFalse = false
+//
+//  println(boolTrue.fold("I am True", "I am False"))
+//  println(boolFalse.fold("I am True", "I am False"))
 
   sealed trait EventAction[A] { //TypeClasses
     def watchedEvent: String

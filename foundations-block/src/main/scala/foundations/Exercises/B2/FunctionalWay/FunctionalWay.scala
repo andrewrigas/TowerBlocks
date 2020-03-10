@@ -49,7 +49,7 @@ object FunctionalWay extends App {
   val product = ???
   val quotient = ???
 
-  //Create a function that has input of 2 Parameters and function
+  //Create a higher order function that has input of 2 Parameters an then pass one of the above operations
   def calculator = ???
 
   //println(s"Addition: ")
@@ -81,6 +81,7 @@ object FunctionalWay extends App {
   }
 
   //Exercise
+  //Higher Order Function
   //Apply on the first 2 elements in a list a Lambda/Anonymous Function
   def listSum2RandomElements(list: List[Int],
                              f: (Int, Int) => Int): Option[Int] = ???

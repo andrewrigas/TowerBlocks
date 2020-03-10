@@ -5,8 +5,9 @@ object Dependencies {
   lazy val foundationsBlockLib = commonLib
 
   private lazy val commonLib = Seq(
-    "org.scalatest" %% "scalatest" % "3.1.0" % "test",
-    "org.scalacheck" %% "scalacheck" % "1.14.1" % "test"
+    "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2",
+    "org.scalatest" %% "scalatest" % "3.1.0" % "test", //test means that those lib will be only use in the /test file path
+    "org.scalacheck" %% "scalacheck" % "1.14.1" % "test", // which is our test code and they will not be downloaded or used for the actual application
   )
 
 }
