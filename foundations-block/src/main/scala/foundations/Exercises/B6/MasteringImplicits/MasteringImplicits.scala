@@ -6,9 +6,9 @@ object MasteringImplicits extends App {
     def value: String
   }
 
-  trait EventsSummoner[T] {
-    def apply(value: String): T
-    def desApply(value: String): T
+  trait EventsSummoner[T] { //Type class
+    def apply(value: String): T //Constructor
+    def desApply(value: String): T //Smart Constructor
   }
 
   final case class PlayEvents(value: String) extends Events
