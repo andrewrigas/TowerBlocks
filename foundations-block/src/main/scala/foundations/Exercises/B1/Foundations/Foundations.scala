@@ -77,4 +77,8 @@ object Foundations extends App {
 
   def whatAmI = "I am lazy like anyone else"
 
+  //Type Aliased
+  type Key = String
+  type Value = (String, Int)
+
 }

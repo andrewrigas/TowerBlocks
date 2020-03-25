@@ -2,7 +2,6 @@ package foundations.Exercises.B3.RecursionFun
 
 import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree
 import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree._
-import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree
 
 object RecursionFun extends App {
 

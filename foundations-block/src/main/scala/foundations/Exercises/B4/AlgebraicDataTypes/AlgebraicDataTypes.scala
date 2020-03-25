@@ -29,15 +29,15 @@ object AlgebraicDataTypes extends App {
   final case class Jaguar(model: String) extends Car
 
   //Type Class or Higher Kinded Type or Parametric Type
-  sealed trait Option[+A] {
-    def apply[A1 >: A](value: A1): Option[A1] =
-      if (value == null) Option.None else Option.Some(value)
+  sealed trait OptionB[+A] {
+    def apply[A1 >: A](value: A1): OptionB[A1] =
+      if (value == null) OptionB.NoneB else OptionB.SomeB(value)
   }
 
-  object Option {
-    final case class Some[+A](value: A) extends Option[A]
+  object OptionB {
+    final case class SomeB[+A](value: A) extends OptionB[A]
 
-    case object None extends Option[Nothing]
+    case object NoneB extends OptionB[Nothing]
   }
 
   //List Example
@@ -65,4 +65,7 @@ object AlgebraicDataTypes extends App {
 
   //Try Exercise
 
+  //Write Type Alias for Option using Either
+
+  //Write Type Alias for Try using Either
 }
