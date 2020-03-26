@@ -5,6 +5,7 @@ import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.OptionB.{
   NoneB,
   SomeB
 }
+import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes._
 import foundations.Solutions.B4.AlgebraicDataTypes.AlgebraicDataTypes.EitherB.{
   LeftB,
   RightB
