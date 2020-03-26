@@ -2,6 +2,15 @@ package foundations.Solutions.B2.FunctionalWay
 
 object FunctionalWay extends App {
 
+  //Exercise
+  //Write a function that takes a Tuple of Strings and 2 Integers
+  //Sum the 2 Integers Together
+  //Concat the Tuple Strings with Sum return a String
+  //For Example
+  //f211(("Hello","World"), 1 , 2) = "HelloWorld3"
+
+  val f211: (String,String) => Int => Int => String = (word1,word2) => x1 => x2 => s"$word1$word2${x1+x2}"
+
   //Exercises
   //Create raw functions that takes 2 parameters and perform an operation
   val sum: (Int, Int) => Int = (x, y) => x + y

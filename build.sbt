@@ -9,4 +9,8 @@ lazy val foundationsBlock = Projects.foundationsBlock
   .settings(parallelExecution := false)
   .settings(libraryDependencies ++= Dependencies.foundationsBlockLib)
 
-lazy val modules: Seq[ProjectReference] = Seq(foundationsBlock)
+lazy val servicesBlock = Projects.servicesBlock
+  .settings(parallelExecution := false)
+  .settings(libraryDependencies ++= Dependencies.servicesBlockLib)
+
+lazy val modules: Seq[ProjectReference] = Seq(foundationsBlock, servicesBlock)

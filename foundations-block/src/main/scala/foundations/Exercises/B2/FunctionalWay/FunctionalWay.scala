@@ -2,6 +2,7 @@ package foundations.Exercises.B2.FunctionalWay
 
 object FunctionalWay extends App {
 
+  //try remove lazy and run the test
   lazy val f11: Int => Int = (x: Int) => x + 1
 
 //  println(s"f11 = ${f11(1)}")
@@ -13,6 +14,14 @@ object FunctionalWay extends App {
   lazy val f21: (Int, Int) => Int = (x1: Int, x2: Int) => x1 + x2
 
   //println(s"f21 = ${f21(1, 2)}")
+
+  //Exercise
+  //Write a function that takes a Tuple of Strings and 2 Integers
+  //Sum the 2 Integers Together
+  //Concat the Tuple Strings with Sum return a String
+  //For Example
+  //f211(("Hello","World"), 1 , 2) = "HelloWorld3"
+
 
   def f22(x1: Int, x2: Int): Int = x1 + x2
 
@@ -31,6 +40,16 @@ object FunctionalWay extends App {
 
   //val f321 = f32(3)
   //val f321: Int => Int = f32(3)
+
+  //Exercise
+  //Write a function that takes a Tuple of Strings and 2 Integers
+  //Sum the 2 Integers Together and print them with the Strings
+  //For Example
+  //f211(("Hello","World"), 1 , 2) = "HelloWorld3"
+  //Create a type alias for that exercise
+
+  type TypeAlias = Nothing
+  val f211: TypeAlias = ???
 
   //println(s"f311 = ${f311(1)}")
 
@@ -67,6 +86,7 @@ object FunctionalWay extends App {
   //Apply a Lambda/Anonymous Function on an Int and return Option
   def flatMapOption(maybeInt: Option[Int],
                     fun: Int => Option[Int]): Option[Int] = ???
+
 
   def listExample(list: List[Int]) = list match {
     case Nil          => 0

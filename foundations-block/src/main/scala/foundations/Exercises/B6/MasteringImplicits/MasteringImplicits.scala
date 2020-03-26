@@ -54,6 +54,8 @@ object MasteringImplicits extends App {
 
   println(desPlayEvent, desStopEvent, desClickEvent)
 
+  //Implicit Classes
+  //Best practise create an object and write them inside
   object TypeHelpers {
 
     implicit class IntHelper(value: Int) {

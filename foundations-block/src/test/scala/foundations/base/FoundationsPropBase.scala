@@ -4,8 +4,8 @@ import org.scalacheck.Gen
 
 trait FoundationsPropBase {
 
-  lazy val integerRangeGen = Gen.choose(0, 31)
+  lazy val genIntDates = Gen.choose(0, 28)
 
-  lazy val genOnOfThisStrings = Gen.oneOf("Hello", "World", "!!!")
+  lazy val genStringWeird = Gen.oneOf("Hello", "World", "!!!", "1@@!!!@@@DD", ".;s'l[[[]]")
 
 }

@@ -2,7 +2,6 @@ package foundations.Exercises.B3.RecursionFun
 
 import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree
 import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree._
-import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree
 
 object RecursionFun extends App {
 
@@ -24,6 +23,10 @@ object RecursionFun extends App {
   // n = 4
   // factorial == 4! => 4 * 3 * 2 * 1
   def factorial(n: Int): Int = ???
+
+  //Exercise
+  //Implement factorial with tail recursion
+  def factoriaTailRec(n: Int,acc: Int): Int = ???
 
   //Nested Function
   def nestedFunction(list: List[Int]): Int = {
@@ -122,6 +125,6 @@ object RecursionFun extends App {
   def combinationsCal(list: List[Char]): List[List[Char]] = ???
 
   val comb = combinationsCal(List('a', 'b', 'c'))
-  println(comb + "  " + comb.size)
+  //println(comb + "  " + comb.size)
 
 }

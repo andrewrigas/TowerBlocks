@@ -95,6 +95,7 @@ object AdHocPolymorphism extends App {
 
 //  println(whoAmIwhatDidIAte[Maria])
 //  println(whoAmIwhatDidIAte[Trump])
+
   //Create an Ad Hoc Polymorphism
 
 }

@@ -7,4 +7,6 @@ object Projects {
   lazy val foundationsBlock =
     Project(id = "FoundationsBlock", base = file("foundations-block"))
 
+  lazy val servicesBlock =
+    Project(id = "ServicesBlock", base = file("services-block"))
 }
