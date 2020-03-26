@@ -29,10 +29,7 @@ object AlgebraicDataTypes extends App {
   final case class Jaguar(model: String) extends Car
 
   //Type Class or Higher Kinded Type or Parametric Type
-  sealed trait OptionB[+A] {
-
-
-  }
+  sealed trait OptionB[+A]
 
   object OptionB {
 

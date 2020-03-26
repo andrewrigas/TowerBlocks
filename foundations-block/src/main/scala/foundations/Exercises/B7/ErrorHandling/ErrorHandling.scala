@@ -1,18 +1,37 @@
 package foundations.Exercises.B7.ErrorHandling
 
 import com.typesafe.scalalogging.LazyLogging
+import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.OptionB.{
+  NoneB,
+  SomeB
+}
+import foundations.Solutions.B4.AlgebraicDataTypes.AlgebraicDataTypes.EitherB.{
+  LeftB,
+  RightB
+}
+import foundations.Solutions.B4.AlgebraicDataTypes.AlgebraicDataTypes._
 
-import scala.util.Try
 import scala.util.matching.Regex
 
-object ErrorHandling extends LazyLogging {
+object ErrorHandling extends LazyLogging with App {
 
-  def division(dividend: Double, divisor: Double): Option[Double] = {
-    Try(dividend / divisor).toOption match {
-      case Some(value) => Some(value)
-      case None        => None
+  def division(dividend: Double, divisor: Double): OptionB[Double] = {
+    TryB(dividend / divisor).toOption match {
+      case Some(value) => SomeB(value)
+      case None        => NoneB
     }
   }
+
+  def setConnection(host: String) = {
+    val possibleCases = 3
+    scala.util.Random.nextInt(possibleCases) match {
+      case 0 => RightB()
+      case 1 => LeftB()
+      case 2 => LeftB()
+    }
+  }
+
+  println(setConnection(""))
 
   sealed trait HttpServerError {
     def errorCode: String
