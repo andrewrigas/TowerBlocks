@@ -102,8 +102,17 @@ object FunctionalWay extends App {
 
   //Exercise
   //Higher Order Function
-  //Apply on the first 2 elements in a list a Lambda/Anonymous Function
+  //Apply a lambda function on the first 2 elements in a list
   def listSum2RandomElements(list: List[Int],
                              f: (Int, Int) => Int): Option[Int] = ???
 
+
+  //Compose 2 or more functions together
+  def andThen(value: Int, f: Int => Int): Int = {
+    f(value)
+  }
+
+  //Exercise
+  //Higher order Function
+  //
 }

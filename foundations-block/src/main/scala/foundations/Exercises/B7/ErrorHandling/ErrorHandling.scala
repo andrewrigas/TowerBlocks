@@ -1,15 +1,8 @@
 package foundations.Exercises.B7.ErrorHandling
 
 import com.typesafe.scalalogging.LazyLogging
-import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.OptionB.{
-  NoneB,
-  SomeB
-}
+import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.OptionB.{NoneB, SomeB}
 import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes._
-import foundations.Solutions.B4.AlgebraicDataTypes.AlgebraicDataTypes.EitherB.{
-  LeftB,
-  RightB
-}
 import foundations.Solutions.B4.AlgebraicDataTypes.AlgebraicDataTypes._
 
 import scala.util.matching.Regex
@@ -18,8 +11,8 @@ object ErrorHandling extends LazyLogging with App {
 
   def division(dividend: Double, divisor: Double): OptionB[Double] = {
     TryB(dividend / divisor).toOption match {
-      case Some(value) => SomeB(value)
-      case None        => NoneB
+      case SomeB(value) => SomeB(value)
+      case NoneB        => NoneB
     }
   }
 
@@ -95,7 +88,6 @@ object ErrorHandling extends LazyLogging with App {
   }
 
   object HttpClient extends Http {
-    import foundations.Solutions.B4.AlgebraicDataTypes.AlgebraicDataTypes.EitherB._
     val host: Url = Url.unsafeApply("localhost") //Default Vale
 
     sealed trait HttpClientError

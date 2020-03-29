@@ -121,7 +121,6 @@ object RecursionFun extends App {
   //For example
   //List(a,b,c)
   //List(List(a,b,c),List(a,b),List(a,c),List(a),List(b,c),List(b),List(c),List()) Empty list is a combination as well
-
   def combinationsCal(list: List[Char]): List[List[Char]] = ???
 
   val comb = combinationsCal(List('a', 'b', 'c'))
