@@ -89,6 +89,19 @@ object RecursionFun extends App {
   println(flatMap(list, x => List(x, x + 1)))
 
   //Exercise
+  //Implement foldLeft tail recursive
+  //Apply a function on each element of list with the acc
+  //For example
+  //List(1,2,3,4), acc = 0
+  //acc = f(0,1)
+  //acc = f(f(0,1),2)
+  //etc
+  def foldLeft(list: List[Int])(acc: Int)(f: (Int,Int) => Int): Int = list match {
+    case Nil => acc
+    case x :: xs => foldLeft(xs)(f(acc,x))(f)
+  }
+
+  //Exercise
   //Apply a Lambda/Anonymous function on the leafs
   //For Example
   // Branch(Branch(Leaf(1),Leaf(2)),Leaf(3))

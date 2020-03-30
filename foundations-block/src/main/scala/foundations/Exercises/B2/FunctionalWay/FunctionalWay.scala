@@ -108,11 +108,16 @@ object FunctionalWay extends App {
 
 
   //Compose 2 or more functions together
-  def andThen(value: Int, f: Int => Int): Int = {
-    f(value)
+  case class Item(name: String, price: Double)
+
+  def applyDiscount(items: List[Item], discount: Double): Double = {
+    //Create a lambda function that extracts the value
+    val getPrice: Item => Double = (item: Item) => item.price
+    //Create a lambda function that calculates the discount
+    val applyDiscount: Double => Double = (price: Double) => price * discount
+
+    //In scala instead of saying getPrice.andThen(applyDiscount) you can use spaces
+    items.map(getPrice andThen applyDiscount).sum
   }
 
-  //Exercise
-  //Higher order Function
-  //
 }

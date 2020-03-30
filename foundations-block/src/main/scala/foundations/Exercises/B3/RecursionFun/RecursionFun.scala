@@ -87,6 +87,21 @@ object RecursionFun extends App {
   //Recursive solution
   def flatMap(list: List[Int], f: Int => List[Int]): List[Int] = ???
 
+  //Exercise
+  //Implement foldLeft tail recursive
+  //Apply a function on each element of list with the acc
+  //For example
+  //List(1,2,3,4), acc = 0
+  //acc = f(0,1)
+  //acc = f(f(0,1),2)
+  //etc
+  def foldLeft(list: List[Int])(acc: Int)(f: (Int,Int) => Int): Int = ???
+
+  def foldRight(list: List[Int])(acc: Int)(f: (Int,Int) => Int): Int = {
+    val reversedList = reverseList(list)
+    foldLeft(reversedList)(acc)((left,right) => f(right,left))
+  }
+
   val tree1: Tree[Int] = Branch(Branch(Leaf(1), Leaf(2)), Leaf(4))
   val tree2: Tree[Int] = Branch(
     Branch(Branch(Leaf(1), Leaf(2)), Leaf(4)),
