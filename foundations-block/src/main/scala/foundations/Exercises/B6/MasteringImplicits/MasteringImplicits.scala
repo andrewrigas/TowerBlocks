@@ -1,5 +1,7 @@
 package foundations.Exercises.B6.MasteringImplicits
 
+import foundations.Solutions.B4.AlgebraicDataTypes.AlgebraicDataTypes.{LeftB, RightB}
+
 object MasteringImplicits extends App {
 
   sealed trait Events {
@@ -75,7 +77,6 @@ object MasteringImplicits extends App {
     }
 
     implicit class BoolToEither(bool: Boolean) {
-      import foundations.Solutions.B4.AlgebraicDataTypes.AlgebraicDataTypes.EitherB._
       import foundations.Solutions.B4.AlgebraicDataTypes.AlgebraicDataTypes.EitherB
       def fold[A, B](left: A, right: B): EitherB[A, B] =
         if (bool) RightB(right) else LeftB(left)
