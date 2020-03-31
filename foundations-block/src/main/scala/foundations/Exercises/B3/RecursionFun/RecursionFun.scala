@@ -89,7 +89,8 @@ object RecursionFun extends App {
 
   //Exercise
   //Implement foldLeft tail recursive
-  //Apply a function on each element of list with the acc
+  //Apply a function on each element of list with an accumulator
+  //Keep executing the lambda function through the list
   //For example
   //List(1,2,3,4), acc = 0
   //acc = f(0,1)
