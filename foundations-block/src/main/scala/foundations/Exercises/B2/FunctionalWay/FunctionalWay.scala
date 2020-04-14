@@ -5,7 +5,7 @@ object FunctionalWay extends App {
   //try remove lazy and run the test
   lazy val f11: Int => Int = (x: Int) => x + 1
 
-//  println(s"f11 = ${f11(1)}")
+  //  println(s"f11 = ${f11(1)}")
 
   def f12(x: Int): Int = x + 1
 
@@ -14,7 +14,6 @@ object FunctionalWay extends App {
   lazy val f21: (Int, Int) => Int = (x1: Int, x2: Int) => x1 + x2
 
   //println(s"f21 = ${f21(1, 2)}")
-
   //Exercise
   //Write a function that takes a Tuple of Strings and 2 Integers
   //Sum the 2 Integers Together
@@ -49,7 +48,7 @@ object FunctionalWay extends App {
   //Create a type alias for that exercise
 
   type TypeAlias = Nothing
-//  val f211: TypeAlias = ???
+  //  val f211: TypeAlias = ???
 
   //println(s"f311 = ${f311(1)}")
 
@@ -58,18 +57,18 @@ object FunctionalWay extends App {
   //Higher Order Function
   def funF(x: Int, f: Int => Int): Int = f(x)
 
-//  println(funF(5 , x => x + 1))
-//  println(funF(5 , f11))
+  //  println(funF(5 , x => x + 1))
+  //  println(funF(5 , f11))
 
   //Exercises
   //Create raw functions that takes 2 parameters and perform an operation
-//  val sum = ???
-//  val subtrahend = ???
-//  val product = ???
-//  val quotient = ???
+  //  val sum = ???
+  //  val subtrahend = ???
+  //  val product = ???
+  //  val quotient = ???
 
   //Create a higher order function that has input of 2 Parameters an then pass one of the above operations
-//  def calculator = ???
+  //  def calculator = ???
 
   //println(s"Addition: ")
   //println(s"Subtraction:")
@@ -79,7 +78,7 @@ object FunctionalWay extends App {
   //Pattern Matching
   def optionExample(maybeInt: Option[Int]): Int = maybeInt match {
     case Some(value) => value
-    case None        => 0
+    case None => 0
   }
 
   //Exercise
@@ -89,15 +88,15 @@ object FunctionalWay extends App {
 
 
   def listExample(list: List[Int]) = list match {
-    case Nil          => 0
+    case Nil => 0
     case head :: tail => head
   }
 
   //Pattern Matching with order
   def listExample2(list: List[Int]): Int = list match {
-    case Nil                    => 0
+    case Nil => 0
     case head :: second :: tail => head
-    case head :: tail           => head
+    case head :: tail => head
   }
 
   //Exercise
@@ -112,23 +111,25 @@ object FunctionalWay extends App {
   val addOne: Int => Int = (x: Int) => x + 1
   val multiplyByTow: Int => Int = (x: Int) => x * 2
 
-  //andThen
-  //andThen is like compose, but calls the first function and then the second, multiplyByTow(addOne(x))
-  val andThenExample: Int => Int = addOne andThen multiplyByTow
-  val resAndThen = andThenExample(2)
-  println(s"Result andThen:  $resAndThen")
-
   //compose
   //compose makes a new function that composes other functions addOne(multiplyByTow(x))
   val composeExample: Int => Int = addOne compose multiplyByTow
   val resCompose = composeExample(2)
-  println(s"Result andThen:  $resCompose")
+  //  println(s"Result andThen:  $resCompose")
+
+  //andThen
+  //andThen is like compose, but calls the first function and then the second, multiplyByTow(addOne(x))
+  val andThenExample: Int => Int = addOne andThen multiplyByTow
+  val resAndThen = andThenExample(2)
+
+  //  println(s"Result andThen:  $resAndThen")
+
 
   //Compose 2 or more functions together
   final case class Item(name: String, price: Double)
 
 
-  def applyDiscount(items: List[Item], discount: Double): Double = {
+  def applyDiscount(itemsList: List[Item], discount: Double): Double = {
 
     //Create a lambda function that extracts the value
     val getPrice: Item => Double = (item: Item) => item.price
@@ -137,48 +138,104 @@ object FunctionalWay extends App {
 
     //In scala instead of saying getPrice.andThen(applyDiscount) you can use spaces
     //andThen solution
-    items.map(getPrice andThen applyDiscount).sum
+    itemsList.map(item => (getPrice andThen applyDiscount) (item)).sum
 
     //compose solution
-    items.map(applyDiscount compose getPrice).sum
+    itemsList.map(applyDiscount compose getPrice).sum
   }
 
-  sealed abstract class Clothes{
+  //Exercise
+  //A Clothes Store is trying to calculate
+  //The total price that of their stock
+  //With and without the profit
+
+  sealed abstract class Clothes {
     def price: Double
     def quantity: Int
     def profit: Double
   }
 
   case object Jumper extends Clothes {
-    val price = 45.00
-    val quantity = 17
-    val profit = 0.40
+    val price: Double = 45.00
+    val quantity: Int = 17
+    val profit: Double = 0.40
   }
 
   case object Shirt extends Clothes {
-    val price = 49.99
-    val quantity = 13
-    val profit = 0.35
+    val price: Double = 49.99
+    val quantity: Int = 13
+    val profit: Double = 0.35
   }
 
   case object Trouser extends Clothes {
-    val price = 30.00
-    val quantity = 24
-    val profit = 0.35
+    val price: Double = 30.00
+    val quantity: Int = 24
+    val profit: Double = 0.35
   }
 
-  def getProfit(stock: List[Clothes]): (Double,Double) = {
+  def getProfit(stock: List[Clothes]): (Double, Double) = {
 
-    val getPrice = (cl: Clothes) => cl.price
-    val getQuantity = (cl: Clothes) => cl.quantity
-    val getProfit = (cl: Clothes) => cl.profit
+    //Create Type alias for tuples
+    //After you solve this exercise try remove the type alias and replace the rest
+    // of the types with the actual tuple and see what happens
+    type PriceQuantity = (Double, Int)
+    type PriceQuantityProfit = (Double, Int, Double)
 
-    val multiplyInt = (x: Int,y: Int) => x * y
+    val getPriceQuantity: Clothes => PriceQuantity = ???
+    val getPriceQuantityProfit: Clothes => PriceQuantityProfit = ???
 
-    val getTotalPriceWithOutProfit = ???
-    val getTotalPriceWithProfit = ???
+    //When you replace the type with tuple you will need to modify this function parameters
+    val calTotalPrice: PriceQuantity => Double = (priceQuantity: PriceQuantity) => ???
+    val calTotalPriceProfit: PriceQuantityProfit => Double = (priceQuantityProfit: PriceQuantityProfit) => ???
+
+    //Use function composition to solve this
+    //After you replace type alias with tuples you should get something interesting here
+    //can you see what is the problem ??
+    val getTotalPriceWithOutProfit: Clothes => Double = ???
+    val getTotalPriceWithProfit: Clothes => Double = ???
+
+    val totalPrices: List[(Double, Double)] = ???
 
     ???
   }
+
+  //Bonus Exercise
+  //We want to split a configuration in to Key Value pairs in a Map collection
+  //The problem is that we might have a nested Key value pairs inside the values
+  //We should ended up with Map(key -> Map(key -> value))
+  //where key is the spark key and value is the spark key value pair
+  //if the value contains only single value then key should be the same with spark key
+  //For Example
+  //Map(
+  // --spark.driver.cores -> Map(--spark.driver.cores -> 2),
+  // --spark.kafka.client.properties -> Map(security.protocol -> SSL, security.password -> 1234)
+  // )
+  val sparkConfig =
+    """--spark.driver.cores=2
+      |--spark.driver.memory=2g
+      |--spark.executor.cores=4
+      |--spark.executor.memory=3g
+      |--spark.executor.instances=1
+      |--spark.kafka.producer.brokers=localhost:8080
+      |--spark.kafka.producer.schemaRegistry=localhost:9090
+      |--spark.kafka.client.properties=security.protocol=SSL,security.password=1234
+      |""".stripMargin
+
+  def getSparkConfig(rawSparkConfig: String): Map[String,Map[String,String]] = {
+
+    //Hint: you might want to use split function
+    //https://alvinalexander.com/scala/how-to-split-csv-strings-in-scala-cookbook/
+    //https://stackoverflow.com/questions/18462826/split-string-only-on-first-instance-java
+
+    val splitLineBreaks: String => Array[String] = ???
+
+    val splitConfigKeyValues: Array[String] => Map[String, String] = ???
+
+    val splitValueToKeyValues: Map[String,String] => Map[String,Map[String,String]] = ???
+
+    ???
+  }
+
+  println(getSparkConfig(sparkConfig))
 
 }
