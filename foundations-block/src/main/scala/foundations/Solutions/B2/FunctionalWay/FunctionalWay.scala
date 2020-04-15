@@ -109,7 +109,8 @@ object FunctionalWay extends App {
 
     //****
     //Transform our callTotalPriceProfit function definition to get a tuple of arguments with .tupled
-    val getTotalPriceWithProfit: Clothes => Double = getPriceQuantityProfit.andThen(calTotalPriceProfit.tupled)
+    val getTotalTupled: ((Double, Int, Double)) => Double = calTotalPriceProfit.tupled
+    val getTotalPriceWithProfit: Clothes => Double = getTotalTupled compose getPriceQuantityProfit
 
     val totalPrices: List[(Double, Double)] = stock.map(cl => (getTotalPriceWithOutProfit(cl) ,getTotalPriceWithProfit(cl)))
 

@@ -4,12 +4,11 @@ import java.net.Socket
 
 import com.typesafe.scalalogging.LazyLogging
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 import scala.util.matching.Regex
 
 final case class Client private (host: String,port: Int) extends LazyLogging {
-
-  implicit val ec: ExecutionContext = ExecutionContext.global
 
   def connectToServer = {
     logger.info(s"Client trying to connect to $host:$port")

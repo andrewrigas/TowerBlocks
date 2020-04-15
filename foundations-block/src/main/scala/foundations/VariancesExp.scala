@@ -9,6 +9,7 @@ object VariancesExp extends App {
 
     final case class Some[A](value: A) extends Option[A]
 
+    //Cant create an object with a Generic Type
     //case object None[A] extends Option[A]
   }
 
@@ -24,7 +25,7 @@ object VariancesExp extends App {
     case object None extends Option1[Nothing]
   }
 
-  // +A make this hierarchy type legal => Nothing is a subtype of Int
+  // +A covariant make my statement legal insert a Nothing type into an Int "Nothing is a subclass of Int"
   val maybeValue1: Option1[Int] = Option1.None
 
   sealed trait Option2[-A] // An invariant class
@@ -37,6 +38,6 @@ object VariancesExp extends App {
     case object None extends Option2[AnyVal]
   }
 
-  // -A creates this hierarchy type legal  => AnyVal is a supertype of Int
+  // -A invariant make my statement legal insert an AnyVal type into an Int "AnyVal is a supertype of Int"
   val maybeValue: Option2[Int] = Option2.None
 }

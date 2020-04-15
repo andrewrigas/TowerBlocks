@@ -2,16 +2,12 @@ package services.B1.ServerSide
 
 import java.io.{InputStream, OutputStream}
 import java.net.{ServerSocket, Socket}
-
 import com.typesafe.scalalogging.LazyLogging
-
-import scala.concurrent.ExecutionContext
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.matching.Regex
 
 final case class StupidServer private (port: Int) extends LazyLogging {
-
-  implicit val ec: ExecutionContext = ExecutionContext.global
 
   //Configure your socket and create an Server Socket object
   val serverSocket: ServerSocket = new ServerSocket(port)
