@@ -1,8 +1,10 @@
 package services.B1.ServerSide
 
-import java.io.{InputStream, OutputStream}
+import java.io.{BufferedReader, InputStream, InputStreamReader, OutputStream}
 import java.net.{ServerSocket, Socket}
+
 import com.typesafe.scalalogging.LazyLogging
+
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.matching.Regex
@@ -14,7 +16,7 @@ final case class StupidServer private (port: Int) extends LazyLogging {
 
   def listen = {
     logger.info("Waiting for a client...")
-    val socketAccept: Socket = serverSocket.accept()
+    val socketAccept: Socket = serverSocket.accept() //Create a socket as soon as you get a connection
     logger.info("New connection established")
     val task = Future {
       val inputStream: InputStream = socketAccept.getInputStream
@@ -30,16 +32,23 @@ final case class StupidServer private (port: Int) extends LazyLogging {
     }
   }
 
-  def service(inputStream: InputStream,outputStream: OutputStream): Unit = ???
+  def service(inputStream: InputStream,outputStream: OutputStream): Unit = {
+    val in = new BufferedReader(new InputStreamReader(inputStream))
+    println(in.readLine())
+    println(outputStream.toString)
+  }
 }
 
-object StupidServer {
+object StupidServer extends LazyLogging {
 
   private def validatePort(port: String): Int = {
     val portPattern: Regex = "^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$".r
     portPattern.findFirstIn(port) match {
       case Some(value) => value.toInt
-      case None => throw new IllegalArgumentException(s"Invalid port Number: $port")
+      case None => {
+        logger.debug(s"Invalid port: $port")
+        throw new IllegalArgumentException(s"Invalid port Number: $port")
+      }
     }
   }
 
