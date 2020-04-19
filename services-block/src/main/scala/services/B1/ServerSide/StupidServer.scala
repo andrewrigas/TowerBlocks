@@ -1,10 +1,8 @@
 package services.B1.ServerSide
 
-import java.io.{BufferedReader, InputStream, InputStreamReader, OutputStream}
+import java.io.{BufferedReader, InputStream, InputStreamReader, OutputStream, PrintStream}
 import java.net.{ServerSocket, Socket}
-
 import com.typesafe.scalalogging.LazyLogging
-
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.matching.Regex
@@ -18,7 +16,7 @@ final case class StupidServer private (port: Int) extends LazyLogging {
     logger.info("Waiting for a client...")
     val socketAccept: Socket = serverSocket.accept() //Create a socket as soon as you get a connection
     logger.info("New connection established")
-    val task = Future {
+    val task: Future[Unit] = Future {
       val inputStream: InputStream = socketAccept.getInputStream
       val outputStream: OutputStream = socketAccept.getOutputStream
       service(inputStream, outputStream)
@@ -34,8 +32,12 @@ final case class StupidServer private (port: Int) extends LazyLogging {
 
   def service(inputStream: InputStream,outputStream: OutputStream): Unit = {
     val in = new BufferedReader(new InputStreamReader(inputStream))
-    println(in.readLine())
-    println(outputStream.toString)
+    val clientMsg = in.readLine()
+    println(s"Client msg: $clientMsg")
+
+    val out = new PrintStream(outputStream)
+    out.println("You msg has been received...")
+
   }
 }
 

@@ -21,6 +21,8 @@ object CaseClassExp extends {
       this.name == person.name && this.age == person.age
     }
 
+    //Used to identify if the instance of tow objects are the same
+    //Each Instance has different hashcode
     override def hashCode(): Int = name.hashCode * 3 + age.hashCode() * 5
 
     override def toString: String = s"Person(${this.name},${this.age})"

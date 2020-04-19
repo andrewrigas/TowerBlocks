@@ -2,13 +2,15 @@ package foundations
 
 object MaxIntExp extends App {
 
-  val minValue = Int.MinValue
-  val maxValue = Int.MaxValue
+  val minValue: Int = Int.MinValue
+  val maxValue: Int = Int.MaxValue
 
-  println(minValue - 1)
-  println(maxValue + 1)
+  println(s"Minimum Int value: $minValue")
+  println(s"Maximum Int value: $maxValue")
 
-  println((minValue - 1) == maxValue)
-  println((maxValue + 1) == minValue)
+  println(s"Minimum Int value - 1: ${minValue - 1}")
+  println(s"Maximum Int value + 1: ${maxValue + 1}")
+
+  println(s"(Maximum Int value + 1) == Minimum Int value =  ${(maxValue + 1) == minValue}")
 
 }
