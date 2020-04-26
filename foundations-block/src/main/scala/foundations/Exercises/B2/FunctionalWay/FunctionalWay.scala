@@ -190,7 +190,7 @@ object FunctionalWay extends App {
 
     //Use function composition to solve this
     //After you replace type alias with tuples you should get something interesting here
-    //can you see what is the problem ??
+    //can you spot what is the problem ??
     val getTotalPriceWithOutProfit: Clothes => Double = ???
     val getTotalPriceWithProfit: Clothes => Double = ???
 

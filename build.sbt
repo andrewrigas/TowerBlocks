@@ -6,15 +6,14 @@ name in ThisBuild := "TowerBlocks"
 scalaVersion in ThisBuild := "2.13.1"
 version in ThisBuild := "git rev-parse --short HEAD".!!.trim
 
-lazy val towerBlocks = Projects.towerBlocks
+lazy val towerBlocks = project.in(file("."))
   .aggregate(modules: _*)
 
 lazy val foundationsBlock = Projects.foundationsBlock
-  .settings(parallelExecution := false)
-  .settings(libraryDependencies ++= Dependencies.foundationsBlockLib)
+  .settings(Dependencies.foundationsBlockLib)
+  .dependsOn(servicesBlock)
 
 lazy val servicesBlock = Projects.servicesBlock
-  .settings(parallelExecution := false)
-  .settings(libraryDependencies ++= Dependencies.servicesBlockLib)
+  .settings(Dependencies.servicesBlockLib)
 
 lazy val modules: Seq[ProjectReference] = Seq(foundationsBlock, servicesBlock)

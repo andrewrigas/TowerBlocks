@@ -1,30 +1,32 @@
+import sbt.Keys.libraryDependencies
 import sbt._
 
 object Dependencies {
 
   object Versions {
     //Runtime Dependencies
-    val scalaLoggingVersion = "3.9.2"
-    val slf4jVersion = "1.7.30"
-    val pureConfigVersion = "0.12.3"
+    val scalaLogging = "3.9.2"
+    val slf4j = "1.7.30"
+    val pureConfig = "0.12.3"
+    val scalaParallelCollection = "0.2.0"
     //Test Dependencies
-    val scalaTestVersion = "3.1.0"
-    val scalaCheckVersion = "1.14.1"
+    val scalaTest = "3.1.0"
+    val scalaCheck = "1.14.1"
   }
 
-  import Versions._
+  lazy val foundationsBlockLib = libraryDependencies ++= commonLib ++ Seq(
+      "org.scala-lang.modules" %% "scala-parallel-collections" % Versions.scalaParallelCollection
+  )
 
-  lazy val foundationsBlockLib = commonLib
-
-  lazy val servicesBlockLib = commonLib ++ Seq(
-    "com.github.pureconfig" %% "pureconfig" % pureConfigVersion
+  lazy val servicesBlockLib = libraryDependencies ++=  commonLib ++ Seq(
+    "com.github.pureconfig" %% "pureconfig" % Versions.pureConfig
   )
 
   private lazy val commonLib = Seq(
-    "com.typesafe.scala-logging" %% "scala-logging" % scalaLoggingVersion,
-    "org.slf4j" % "slf4j-simple" % slf4jVersion,
-    "org.scalatest" %% "scalatest" % scalaTestVersion % "test", //test means that those lib will be only use in the /test file path
-    "org.scalacheck" %% "scalacheck" % scalaCheckVersion % "test", // which is our test code and they will not be downloaded or used for the actual application
+    "com.typesafe.scala-logging" %% "scala-logging" % Versions.scalaLogging,
+    "org.slf4j" % "slf4j-simple" % Versions.slf4j,
+    "org.scalatest" %% "scalatest" % Versions.scalaTest % "test", //test means that those lib will be only use in the /test file path
+    "org.scalacheck" %% "scalacheck" % Versions.scalaCheck % "test", // which is our test code and they will not be downloaded or used for the actual application
   )
 
 }

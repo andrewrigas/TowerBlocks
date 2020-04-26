@@ -12,6 +12,6 @@ object ClientSide extends App {
 
   val client = Client(clientConfig.clientConfig.host,clientConfig.clientConfig.port)
 
-  client.connectToServer
+  client.makeRequest
 
 }

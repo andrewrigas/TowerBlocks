@@ -65,11 +65,11 @@ object Foundations extends App {
 
   //  println(flattenList)
 
-  //  println(s"y = $y")
+    println(s"y = $y")
 
-//  println(s"z = $z")
+  println(s"z = $z")
 
-//  println(s"whatAmI = $whatAmI")
+  println(s"whatAmI = $whatAmI")
 
   val y = "Am I Lazy ?"
 

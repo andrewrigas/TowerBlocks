@@ -1,6 +1,6 @@
 package services.B2.ClientSide
 
-import java.io.{BufferedReader, InputStream, InputStreamReader, OutputStream, PrintWriter}
+import java.io.{BufferedReader, InputStream, InputStreamReader, OutputStream, PrintStream, PrintWriter}
 import java.net.Socket
 
 import com.typesafe.scalalogging.LazyLogging
@@ -11,22 +11,51 @@ import scala.util.matching.Regex
 
 final case class Client private (host: String,port: Int) extends LazyLogging {
 
-  def connectToServer = {
+  final case class IO(input: BufferedReader, output: PrintStream)
+
+  def makeRequest = {
+    while (true){
+      val socket = connectToServer
+      val io = getIO(socket)
+      Thread.sleep(1000)
+      Future{clientRequest(io,"Hello Server")}.onComplete(_ => socket.close())
+    }
+  }
+
+  private def connectToServer = {
     logger.info(s"Client trying to connect to $host:$port")
     val socket: Socket = new Socket(host,port)
     logger.info(s"Successful client connection with the server $host:$port")
-    Future {
-      clientRequest(socket.getInputStream,socket.getOutputStream)
-    }.onComplete(_ => socket.close())
-
+    socket
   }
 
-  def clientRequest(inputStream: InputStream,outputStream: OutputStream): Unit = {
-    val out = new PrintWriter(outputStream)
-    out.println("Hello Server")
-    out.flush()
-    val in = new BufferedReader(new InputStreamReader(inputStream))
-    val serverResponse = in.readLine()
+  private def getIO(socket: Socket): IO = {
+    //Hint
+    //Readers read characters
+    //Streams read bytes
+
+    //Output stream writes on the socket
+    val outputStream: OutputStream = socket.getOutputStream
+    val myOutput: PrintStream = new PrintStream(outputStream)
+
+    //Input stream reads from the socket
+    val inputStream: InputStream = socket.getInputStream
+    //InputStreamReader transform our inputStream to Chars
+    val inputStreamReader: InputStreamReader = new InputStreamReader(inputStream)
+    //BufferReader read each char from inputStreamReader into a buffer
+    val myInput: BufferedReader = new BufferedReader(inputStreamReader)
+
+    IO(input = myInput,output = myOutput)
+  }
+
+  private def clientRequest(io: IO, message: String): Unit = {
+    //Output stream writes on the socket
+    //Write on socket string message
+    io.output.println(message)
+
+    //Input stream reads from the socket
+    //Read a line from the server message
+    val serverResponse: String = io.input.readLine()
     println(s"Server response: $serverResponse")
   }
 

@@ -1,4 +1,5 @@
 package foundations
+import scala.collection.parallel.CollectionConverters._
 
 object RaceConditionExp extends App {
 
@@ -7,7 +8,7 @@ object RaceConditionExp extends App {
   var i: Int = 0
 
   //Sequential
-  for(j <- 1 to 10000){
+  for(j <- 1.to(10000)){
     i += 1
   }
 

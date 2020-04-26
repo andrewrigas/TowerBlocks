@@ -14,14 +14,17 @@ final case class StupidServer private (port: Int) extends LazyLogging {
 
   def listen = {
     logger.info("Waiting for a client...")
-    val socketAccept: Socket = serverSocket.accept() //Create a socket as soon as you get a connection
+    //ServerSocket accept will create a socket and (block) wait until a connection with a client has been established
+    val socket: Socket = serverSocket.accept() //Create a new socket as soon as you get a connection
     logger.info("New connection established")
-    val task: Future[Unit] = Future {
-      val inputStream: InputStream = socketAccept.getInputStream
-      val outputStream: OutputStream = socketAccept.getOutputStream
+    Future {
+      //Streams read bytes
+      //Input stream reads from the socket
+      val inputStream: InputStream = socket.getInputStream
+      //Output stream writes on the socket
+      val outputStream: OutputStream = socket.getOutputStream
       service(inputStream, outputStream)
-    }
-    task.onComplete(_ => socketAccept.close())
+    }.onComplete(_ => socket.close())
   }
 
   def listenForClients = {
@@ -31,13 +34,15 @@ final case class StupidServer private (port: Int) extends LazyLogging {
   }
 
   def service(inputStream: InputStream,outputStream: OutputStream): Unit = {
-    val in = new BufferedReader(new InputStreamReader(inputStream))
-    val clientMsg = in.readLine()
-    println(s"Client msg: $clientMsg")
-
-    val out = new PrintStream(outputStream)
+    //InputStreamReader transform our inputStream to Chars
+    val inputStreamReader: InputStreamReader = new InputStreamReader(inputStream)
+    //BufferReader read each char from inputStreamReader into a buffer
+    val in: BufferedReader = new BufferedReader(inputStreamReader)
+    //readLine will read all the bytes from the input stream until the end of a line
+    val clientMsg: String = in.readLine()
+    println("Client msg: " + clientMsg)
+    val out: PrintStream = new PrintStream(outputStream)
     out.println("You msg has been received...")
-
   }
 }
 

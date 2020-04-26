@@ -2,12 +2,9 @@ import sbt._
 
 object Projects {
 
-  def createProject(name: String,baseFile: String) = {
+  def createProject(name: String,baseFile: String): Project =
     Project(id = name, base = file(baseFile))
-      //.settings(ScalaOptions.compileTimeOptions)
-  }
-
-  lazy val towerBlocks = createProject(name = "TowerBlocks",baseFile = ".")
+//      .settings(ScalaOptions.inCompile)
 
   lazy val foundationsBlock = createProject(name = "FoundationsBlock",baseFile = "foundations-block")
 
