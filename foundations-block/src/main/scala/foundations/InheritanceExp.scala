@@ -12,7 +12,7 @@ object InheritanceExp extends App {
   class Woman extends Human with HumanBehaviours
   //You cannot extend more than one abstract class on a subclass
   //The order matters extends Abstract Class with Only Traits are allowed
-  //class Man extends HumanBehaviours with Human
+  //class Man extends HumanBehaviours with Human //Illegal
 
   //Experiment 1
   abstract class Animal
