@@ -12,7 +12,7 @@ object FileWriter extends App {
 
   val message = "Hello World!"
 
-  val file: File = new File(fileWriterConfig.filePath)
+  val file: File = new File(fileWriterConfig.filePath + fileWriterConfig.fileName)
 
   val printWriterSocket: PrintWriter = new PrintWriter(file)
   printWriterSocket.write(message)
