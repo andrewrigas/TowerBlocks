@@ -14,19 +14,34 @@ object Dependencies {
     val scalaCheck = "1.14.1"
   }
 
-  lazy val foundationsBlockLib = libraryDependencies ++= commonLib ++ Seq(
-      "org.scala-lang.modules" %% "scala-parallel-collections" % Versions.scalaParallelCollection
+  object Libraries {
+    //Runtime Dependencies
+    val scalaParallelCollections = "org.scala-lang.modules" %% "scala-parallel-collections" % Versions.scalaParallelCollection
+    val pureConfig = "com.github.pureconfig" %% "pureconfig" % Versions.pureConfig
+    val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % Versions.scalaLogging
+    val sl4j = "org.slf4j" % "slf4j-simple" % Versions.slf4j
+    //Test Dependencies
+    val scalaTest = "org.scalatest" %% "scalatest" % Versions.scalaTest //test means that those lib will be only use in the /test file path
+    val scalaCheck = "org.scalacheck" %% "scalacheck" % Versions.scalaCheck // which is our test code and they will not be downloaded or used for the actual application
+  }
+
+  lazy val foundationsBlock = libraryDependencies ++= test ++ Seq(
+    Libraries.scalaParallelCollections
   )
 
-  lazy val servicesBlockLib = libraryDependencies ++=  commonLib ++ Seq(
-    "com.github.pureconfig" %% "pureconfig" % Versions.pureConfig
-  )
+  lazy val servicesBlock = libraryDependencies ++=  test ++ commonLib
+
+  lazy val fileWriterBlock = libraryDependencies ++= test ++ commonLib
 
   private lazy val commonLib = Seq(
-    "com.typesafe.scala-logging" %% "scala-logging" % Versions.scalaLogging,
-    "org.slf4j" % "slf4j-simple" % Versions.slf4j,
-    "org.scalatest" %% "scalatest" % Versions.scalaTest % "test", //test means that those lib will be only use in the /test file path
-    "org.scalacheck" %% "scalacheck" % Versions.scalaCheck % "test", // which is our test code and they will not be downloaded or used for the actual application
+    Libraries.pureConfig,
+    Libraries.scalaLogging,
+    Libraries.sl4j
+  )
+
+  private lazy val test = Seq(
+    Libraries.scalaCheck % "test",
+    Libraries.scalaTest % "test"
   )
 
 }
