@@ -1,7 +1,3 @@
-val dependenciesGraphVersion = "0.10.0-RC1"
-val scalaFmtVersion = "2.2.1"
-
-addSbtPlugin(
-  "net.virtual-void" % "sbt-dependency-graph" % dependenciesGraphVersion
-)
-addSbtPlugin("org.scalameta" % "sbt-scalafmt" % scalaFmtVersion)
+addDependencyTreePlugin
+addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.6")
+addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.34")
