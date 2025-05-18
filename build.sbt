@@ -17,16 +17,16 @@ ThisBuild / run / fork                := true
 ThisBuild / Test / parallelExecution  := true
 ThisBuild / Test / testForkedParallel := true
 
-def createProject(name: String, baseFile: String): Project =
-  Project(id = name, base = file(baseFile))
+def createModule(moduleName: String): Project =
+  Project(id = moduleName, base = file(moduleName))
     .settings(Settings.ScalaCompiler)
     .settings(Aliases.all)
 
-lazy val towerBlocks = Project("TowerBlocks", file("."))
-  .aggregate(modules*)
+lazy val towerBlocks = Project("tower-blocks", file("."))
+  .aggregate(foundationsBlock, fileWriterBlock, serverBlock)
 
-lazy val foundationsBlock = createProject(name = "FoundationsBlock", baseFile = "foundations-block")
-  .dependsOn(servicesBlock)
+lazy val foundationsBlock = createModule("foundations-block")
+  .dependsOn(serverBlock)
   .settings(
     libraryDependencies ++= Seq(
       Dependencies.scalaParallelCollections,
@@ -38,7 +38,7 @@ lazy val foundationsBlock = createProject(name = "FoundationsBlock", baseFile = 
     )
   )
 
-lazy val fileWriterBlock = createProject(name = "FileWriter", baseFile = "file-writer-block")
+lazy val fileWriterBlock = createModule("file-writer-block")
   .settings(
     libraryDependencies ++= Seq(
       Dependencies.scalaParallelCollections,
@@ -50,7 +50,7 @@ lazy val fileWriterBlock = createProject(name = "FileWriter", baseFile = "file-w
     )
   )
 
-lazy val servicesBlock = createProject(name = "ServicesBlock", baseFile = "services-block")
+lazy val serverBlock = createModule("server-block")
   .settings(
     libraryDependencies ++= Seq(
       Dependencies.scalaParallelCollections,
@@ -61,5 +61,3 @@ lazy val servicesBlock = createProject(name = "ServicesBlock", baseFile = "servi
       Dependencies.scalaCheck % Test,
     )
   )
-
-lazy val modules: Seq[ProjectReference] = Seq(foundationsBlock, servicesBlock, fileWriterBlock)

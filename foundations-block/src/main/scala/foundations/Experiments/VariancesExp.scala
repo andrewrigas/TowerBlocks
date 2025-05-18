@@ -1,4 +1,4 @@
-package foundations
+package foundations.Experiments
 
 object VariancesExp extends App {
 

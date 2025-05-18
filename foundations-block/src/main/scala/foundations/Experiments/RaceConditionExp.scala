@@ -1,4 +1,5 @@
-package foundations
+package foundations.Experiments
+
 import scala.collection.parallel.CollectionConverters.*
 
 object RaceConditionExp extends App {
