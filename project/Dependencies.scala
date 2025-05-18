@@ -1,47 +1,23 @@
-import sbt.Keys.libraryDependencies
-import sbt._
+import sbt.*
 
 object Dependencies {
 
-  object Versions {
-    //Runtime Dependencies
-    val scalaLogging = "3.9.2"
-    val slf4j = "1.7.30"
-    val pureConfig = "0.12.3"
-    val scalaParallelCollection = "0.2.0"
-    //Test Dependencies
-    val scalaTest = "3.1.0"
-    val scalaCheck = "1.14.1"
-  }
+  lazy val scalaLoggingV            = "3.9.5"
+  lazy val slf4jV                   = "2.0.17"
+  lazy val pureConfigV              = "0.17.9"
+  lazy val scalaParallelCollectionV = "1.2.0"
+  lazy val scalaTestV               = "3.2.19"
+  lazy val scalaCheckV              = "1.18.1"
 
-  object Libraries {
-    //Runtime Dependencies
-    val scalaParallelCollections = "org.scala-lang.modules" %% "scala-parallel-collections" % Versions.scalaParallelCollection
-    val pureConfig = "com.github.pureconfig" %% "pureconfig" % Versions.pureConfig
-    val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % Versions.scalaLogging
-    val sl4j = "org.slf4j" % "slf4j-simple" % Versions.slf4j
-    //Test Dependencies
-    val scalaTest = "org.scalatest" %% "scalatest" % Versions.scalaTest //test means that those lib will be only use in the /test file path
-    val scalaCheck = "org.scalacheck" %% "scalacheck" % Versions.scalaCheck // which is our test code and they will not be downloaded or used for the actual application
-  }
+  // Utils
+  lazy val scalaParallelCollections = "org.scala-lang.modules" %% "scala-parallel-collections" % scalaParallelCollectionV
+  lazy val pureConfig               = "com.github.pureconfig" %% "pureconfig-core" % pureConfigV
 
-  lazy val foundationsBlock = libraryDependencies ++= test ++ Seq(
-    Libraries.scalaParallelCollections
-  )
+  // Logging
+  lazy val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % scalaLoggingV
+  lazy val sl4j         = "org.slf4j"                   % "slf4j-simple"  % slf4jV
 
-  lazy val servicesBlock = libraryDependencies ++=  test ++ commonLib
-
-  lazy val fileWriterBlock = libraryDependencies ++= test ++ commonLib
-
-  private lazy val commonLib = Seq(
-    Libraries.pureConfig,
-    Libraries.scalaLogging,
-    Libraries.sl4j
-  )
-
-  private lazy val test = Seq(
-    Libraries.scalaCheck % "test",
-    Libraries.scalaTest % "test"
-  )
-
+  // Test
+  lazy val scalaTest = "org.scalatest" %% "scalatest" % scalaTestV
+  lazy val scalaCheck = "org.scalacheck" %% "scalacheck" % scalaCheckV
 }

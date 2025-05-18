@@ -8,18 +8,18 @@ object MasteringImplicits extends App {
     def value: String
   }
 
-  trait EventsSummoner[T] { //Type class
-    def apply(value: String): T //Constructor
-    def desApply(value: String): T //Smart Constructor
+  trait EventsSummoner[T] { // Type class
+    def apply(value: String): T // Constructor
+    def desApply(value: String): T // Smart Constructor
   }
 
   final case class PlayEvents(value: String) extends Events
 
   implicit object PlayEvents extends EventsSummoner[PlayEvents] { // Summoner
-    //Apply method is the constructor in Scala
+    // Apply method is the constructor in Scala
     def apply(value: String): PlayEvents = new PlayEvents(value)
 
-    //Smart constructor
+    // Smart constructor
     override def desApply(value: String): PlayEvents =
       new PlayEvents(value.toUpperCase)
   }
@@ -27,10 +27,10 @@ object MasteringImplicits extends App {
   final case class StopEvents(value: String) extends Events
 
   implicit object StopEvents extends EventsSummoner[StopEvents] { // Summoner
-    //Apply method is the constructor in Scala
+    // Apply method is the constructor in Scala
     def apply(value: String): StopEvents = new StopEvents(value)
 
-    //Smart constructor
+    // Smart constructor
     override def desApply(value: String): StopEvents =
       new StopEvents(value.toUpperCase)
   }
@@ -38,36 +38,35 @@ object MasteringImplicits extends App {
   final case class ClickEvents(value: String) extends Events
 
   implicit object ClickEvents extends EventsSummoner[ClickEvents] { // Summoner
-    //Apply method is the constructor in Scala
+    // Apply method is the constructor in Scala
     def apply(value: String): ClickEvents = new ClickEvents(value)
 
-    //Smart constructor
+    // Smart constructor
     override def desApply(value: String): ClickEvents =
       new ClickEvents(value.toUpperCase)
   }
 
-  def deserialize[A <: Events](value: String)(
-    implicit summoner: EventsSummoner[A]
+  def deserialize[A <: Events](value: String)(implicit
+      summoner: EventsSummoner[A]
   ): A = summoner.desApply(value)
 
-  val desPlayEvent = deserialize[PlayEvents]("PlaYeVent")
-  val desStopEvent = deserialize[StopEvents]("StoPEVEnt")
-  val desClickEvent = deserialize[ClickEvents]("cliCkEvent")
+  val desPlayEvent: PlayEvents   = deserialize[PlayEvents]("PlaYeVent")
+  val desStopEvent: StopEvents   = deserialize[StopEvents]("StoPEVEnt")
+  val desClickEvent: ClickEvents = deserialize[ClickEvents]("cliCkEvent")
 
-  println(desPlayEvent, desStopEvent, desClickEvent)
+  val _ = println(s"$desPlayEvent,  $desStopEvent, $desClickEvent")
 
-  //Implicit Classes
-  //Best practise create an object and write them inside
+  // Implicit Classes
+  // Best practise create an object and write them inside
   object TypeHelpers {
 
     implicit class IntHelper(value: Int) {
       def addFour: Int = value + 4
       def factorial: Long = {
-        def fac(x: Long): Long = {
+        def fac(x: Long): Long =
           if (x == 0) 1
           else if (x > 0) x * fac(x - 1)
           else x * fac(x + 1)
-        }
         fac(value.toLong)
       }
     }
@@ -101,7 +100,7 @@ object MasteringImplicits extends App {
 //  println(boolTrue.fold("I am True", "I am False"))
 //  println(boolFalse.fold("I am True", "I am False"))
 
-  sealed trait EventAction[A] { //TypeClasses
+  sealed trait EventAction[A] { // TypeClasses
     def watchedEvent: String
   }
 
@@ -141,20 +140,17 @@ object MasteringImplicits extends App {
 //  println(eventMsgPlayEvent.watchedEvent)
 //  println(eventMsgStopEvent)
 
-  implicit def pairEvents[HEAD, TAIL](
-    implicit
-    eventsHead: EventAction[HEAD],
-    eventsTail: EventAction[TAIL]
+  implicit def pairEvents[HEAD, TAIL](implicit
+      eventsHead: EventAction[HEAD],
+      eventsTail: EventAction[TAIL],
   ): EventAction[(HEAD, TAIL)] = new EventAction[(HEAD, TAIL)] {
-    val watchedEvent: String = {
+    val watchedEvent: String =
       s"(${eventsHead.watchedEvent} -> ${eventsTail.watchedEvent})"
-    }
   }
 
   type playStopEvents =
     EventAction[
-      (PlayEvent,
-       (ClickEvent, (StopEvent, (PlayEvent, (ClickEvent, StopEvent)))))
+      (PlayEvent, (ClickEvent, (StopEvent, (PlayEvent, (ClickEvent, StopEvent)))))
     ]
 
   val pairEventsResolution = implicitly[playStopEvents].watchedEvent

@@ -1,27 +1,27 @@
 package foundations.Exercises.B7.ErrorHandling
 
 import com.typesafe.scalalogging.LazyLogging
+import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.*
 import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.OptionB.{NoneB, SomeB}
-import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes._
-import foundations.Solutions.B4.AlgebraicDataTypes.AlgebraicDataTypes._
+import foundations.Solutions.B4.AlgebraicDataTypes.AlgebraicDataTypes.*
 
 import scala.util.matching.Regex
 
 object ErrorHandling extends LazyLogging with App {
 
-  def division(dividend: Double, divisor: Double): OptionB[Double] = {
+  def division(dividend: Double, divisor: Double): OptionB[Double] =
     TryB(dividend / divisor).toOption match {
       case SomeB(value) => SomeB(value)
       case NoneB        => NoneB
     }
-  }
 
   def setConnection(host: String) = {
     val possibleCases = 3
     scala.util.Random.nextInt(possibleCases) match {
-      case 0 => RightB()
-      case 1 => LeftB()
-      case 2 => LeftB()
+      case 0 => RightB(0)
+      case 1 => LeftB("1")
+      case 2 => LeftB("2")
+      case _ => LeftB("NaN")
     }
   }
 
@@ -61,7 +61,7 @@ object ErrorHandling extends LazyLogging with App {
 
     private def checkUrl(url: String): Boolean = {
 
-      logger.info(s"Url: info => validating $url url") //log
+      logger.info(s"Url: info => validating $url url") // log
 
       val urlRegex: Regex =
         """^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$""".r
@@ -88,24 +88,24 @@ object ErrorHandling extends LazyLogging with App {
   }
 
   object HttpClient extends Http {
-    val host: Url = Url.unsafeApply("localhost") //Default Vale
+    val host: Url = Url.unsafeApply("localhost") // Default Vale
 
     sealed trait HttpClientError
 
-    //???
+    // ???
 
     def apply(url: Url) = new HttpClient(url)
 
     def apply(str: String): HttpClient = {
       val url: Url = Url(str) match {
         case RightB(value) => {
-          logger.info(s"HttpClient: info => success parsing $str") //log
+          logger.info(s"HttpClient: info => success parsing $str") // log
           value
         }
         case _ => {
           logger.warn(
             s"HttpClient: warn => url validation error $str failed to parse to Url"
-          ) //log
+          ) // log
           host
         }
       }

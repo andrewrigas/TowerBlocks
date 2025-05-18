@@ -1,8 +1,8 @@
 package foundations.unit
 
+import foundations.Exercises.B3.RecursionFun.RecursionFun.*
+import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree.*
 import foundations.base.FoundationsSpecBase
-import foundations.Exercises.B3.RecursionFun.RecursionFun._
-import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree._
 
 class RecursionFunSpec extends FoundationsSpecBase {
 
@@ -29,8 +29,8 @@ class RecursionFunSpec extends FoundationsSpecBase {
     }
 
     "aggOnRange should" ignore {
-      val min = 1
-      val max = 3
+      val min                       = 1
+      val max                       = 3
       val lambda: (Int, Int) => Int = (a, b) => a + b
 
       aggOnRange(min, max, lambda) shouldBe 6
@@ -44,14 +44,14 @@ class RecursionFunSpec extends FoundationsSpecBase {
       aggFactorialRange(x1, x2) shouldBe 32
     }
 
-    //sumOfAllElements1
+    // sumOfAllElements1
 
-    //sumOfAllElements2
+    // sumOfAllElements2
 
-    //reverseList
-    //addToTheBottom
+    // reverseList
+    // addToTheBottom
 
-    //Calculate Tree Sum
+    // Calculate Tree Sum
     "calculateTreeSum should calculate the sum of all leafs" in {
       val tree1Sum = 7
       val tree2Sum = 19
@@ -61,14 +61,14 @@ class RecursionFunSpec extends FoundationsSpecBase {
         Branch(Branch(Leaf(1), Leaf(2)), Leaf(4)),
         Branch(
           Branch(Branch(Leaf(3), Branch(Leaf(2), Leaf(1))), Leaf(2)),
-          Leaf(4)
-        )
+          Leaf(4),
+        ),
       )
       calculateSumOfTheTree(tree1) shouldBe tree1Sum
       calculateSumOfTheTree(tree2) shouldBe tree2Sum
     }
 
-    //Remove ignore
+    // Remove ignore
     "mapOnTree should apply a function to leafs" ignore {
 
       val tree1 = Branch(Branch(Leaf(1), Leaf(2)), Leaf(4))
@@ -76,8 +76,8 @@ class RecursionFunSpec extends FoundationsSpecBase {
         Branch(Branch(Leaf(1), Leaf(2)), Leaf(4)),
         Branch(
           Branch(Branch(Leaf(3), Branch(Leaf(2), Leaf(1))), Leaf(2)),
-          Leaf(4)
-        )
+          Leaf(4),
+        ),
       )
 
       val tree1Res = Branch(Branch(Leaf(2), Leaf(3)), Leaf(5))
@@ -85,8 +85,8 @@ class RecursionFunSpec extends FoundationsSpecBase {
         Branch(Branch(Leaf(2), Leaf(3)), Leaf(5)),
         Branch(
           Branch(Branch(Leaf(4), Branch(Leaf(3), Leaf(2))), Leaf(3)),
-          Leaf(5)
-        )
+          Leaf(5),
+        ),
       )
       mapOnTree(tree1, (x: Int) => x + 1) shouldBe tree1Res
       mapOnTree(tree2, (x: Int) => x + 1) shouldBe tree2Res

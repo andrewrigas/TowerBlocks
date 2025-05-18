@@ -1,20 +1,20 @@
 package foundations.Solutions.B3.RecursionFun
 
 import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree
-import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree._
+import foundations.Exercises.B4.AlgebraicDataTypes.AlgebraicDataTypes.Tree.*
 
 object RecursionFun extends App {
 
-  //Exercises
-  //Calculate Factorial recursively
-  //For example:
+  // Exercises
+  // Calculate Factorial recursively
+  // For example:
   // n = 4
   // factorial == 4! => 4 * 3 * 2 * 1
   def factorial(n: Int): Int = if (n <= 0) 1 else n * factorial(n - 1)
 
   def parenthesisBalance(chars: List[Char]): Boolean = {
 
-    def parCount(chars: List[Char], acc: Int = 0): Int = {
+    def parCount(chars: List[Char], acc: Int = 0): Int =
       if (acc < 0) acc
       else {
         chars match {
@@ -24,7 +24,6 @@ object RecursionFun extends App {
           case _ :: xs   => parCount(xs, acc)
         }
       }
-    }
     parCount(chars) == 0
   }
 
@@ -32,23 +31,23 @@ object RecursionFun extends App {
 //  println(parenthesisBalance(List('}', '{', '}', '}')))
 //  println(parenthesisBalance(List('{', '{', '}', '}')))
 
-  //Exercise
-  //Apply factorial on a range of values and aggregate them
-  //For example:
-  //a = 1, b = 5
-  //Aggregation f1 + f2
-  //aggFactorialRange == 1! + 2! + 3! + 4! + 5!
+  // Exercise
+  // Apply factorial on a range of values and aggregate them
+  // For example:
+  // a = 1, b = 5
+  // Aggregation f1 + f2
+  // aggFactorialRange == 1! + 2! + 3! + 4! + 5!
   def aggFactorialRange(a: Int, b: Int): Int =
     if (a == b) factorial(a)
     else if (a < b) factorial(a) + aggFactorialRange(a + 1, b)
     else factorial(b) + aggFactorialRange(a, b + 1)
 
-  //Exercise
-  //Apply a function on a range of two values
-  //For example:
+  // Exercise
+  // Apply a function on a range of two values
+  // For example:
   // a = 1, b = 5
   // fun = (x1, x2) => x1 + x2
-  //functionOnRange == 1 + 2 + 3 + 4 + 5
+  // functionOnRange == 1 + 2 + 3 + 4 + 5
   def aggOnRange(a: Int, b: Int, fun: (Int, Int) => Int): Int =
     if (a == b) a
     else if (a < b) fun(a, aggOnRange(a + 1, b, fun))
@@ -61,8 +60,8 @@ object RecursionFun extends App {
 
 //  println(ans)
 
-  //Exercise
-  //Reverse the order of the elements in the list
+  // Exercise
+  // Reverse the order of the elements in the list
   def reverseList(list: List[Int]): List[Int] = list match {
     case Nil     => Nil
     case x :: xs => reverseList(xs) :+ x
@@ -70,17 +69,17 @@ object RecursionFun extends App {
   val list = List(1, 2, 3, 4)
 //  println(reverseList(list))
 
-  //Exercise
-  //Implement the map higher order function
-  //Recursive solution
+  // Exercise
+  // Implement the map higher order function
+  // Recursive solution
   def map(list: List[Int], f: Int => Int): List[Int] = list match {
     case Nil     => Nil
     case x :: xs => f(x) :: map(xs, f)
   }
 
-  //Exercise
-  //Implement the flatMap higher order function
-  //Recursive solution
+  // Exercise
+  // Implement the flatMap higher order function
+  // Recursive solution
   def flatMap(list: List[Int], f: Int => List[Int]): List[Int] = list match {
     case Nil     => Nil
     case x :: xs => f(x) ++ flatMap(xs, f)
@@ -88,22 +87,22 @@ object RecursionFun extends App {
 
   println(flatMap(list, x => List(x, x + 1)))
 
-  //Exercise
-  //Implement foldLeft tail recursive
-  //Apply a function on each element of list with the acc
-  //For example
-  //List(1,2,3,4), acc = 0
-  //acc = f(0,1)
-  //acc = f(f(0,1),2)
-  //etc
-  def foldLeft(list: List[Int])(acc: Int)(f: (Int,Int) => Int): Int = list match {
-    case Nil => acc
-    case x :: xs => foldLeft(xs)(f(acc,x))(f)
+  // Exercise
+  // Implement foldLeft tail recursive
+  // Apply a function on each element of list with the acc
+  // For example
+  // List(1,2,3,4), acc = 0
+  // acc = f(0,1)
+  // acc = f(f(0,1),2)
+  // etc
+  def foldLeft(list: List[Int])(acc: Int)(f: (Int, Int) => Int): Int = list match {
+    case Nil     => acc
+    case x :: xs => foldLeft(xs)(f(acc, x))(f)
   }
 
-  //Exercise
-  //Apply a Lambda/Anonymous function on the leafs
-  //For Example
+  // Exercise
+  // Apply a Lambda/Anonymous function on the leafs
+  // For Example
   // Branch(Branch(Leaf(1),Leaf(2)),Leaf(3))
   // x => x + 1
   // Res: Branch(Branch(Leaf(1+1),Leaf(2+1)),Leaf(3+1)
@@ -116,14 +115,14 @@ object RecursionFun extends App {
   val tree1: Tree[Int] = Branch(Branch(Leaf(1), Leaf(2)), Leaf(4))
   val tree2: Tree[Int] = Branch(
     Branch(Branch(Leaf(1), Leaf(2)), Leaf(4)),
-    Branch(Branch(Branch(Leaf(3), Branch(Leaf(2), Leaf(1))), Leaf(2)), Leaf(4))
+    Branch(Branch(Branch(Leaf(3), Branch(Leaf(2), Leaf(1))), Leaf(2)), Leaf(4)),
   )
 
   println(mapOnTree(tree1, x => x + 1))
   println(mapOnTree(tree2, x => x + 1))
 
-  //Bonus
-  //Count how many different ways you can make change for an amount,
+  // Bonus
+  // Count how many different ways you can make change for an amount,
   // given a list of coin denominations.
   // For example:
   // There are 3 ways to give change for 4
@@ -141,9 +140,7 @@ object RecursionFun extends App {
 
   println(countChange(4, list))
 
-  def countChangeGetList(money: Int,
-                         coins: List[Int],
-                         acc: List[Int] = Nil): List[List[Int]] =
+  def countChangeGetList(money: Int, coins: List[Int], acc: List[Int] = Nil): List[List[Int]] =
     if (money == 0) List(acc)
     else if (money < 0) Nil
     else
@@ -156,16 +153,16 @@ object RecursionFun extends App {
 
   println(countChangeGetList(4, list))
 
-  //MEGA BONUS
-  //Implement a function that calculates all the possible combinations of a list with chars
-  //For example
-  //List(a,b,c)
-  //List(List(a,b,c),List(a,b),List(a,c),List(a),List(b,c),List(b),List(c),List())
+  // MEGA BONUS
+  // Implement a function that calculates all the possible combinations of a list with chars
+  // For example
+  // List(a,b,c)
+  // List(List(a,b,c),List(a,b),List(a,c),List(a),List(b,c),List(b),List(c),List())
 
-  //Keep in mind this is my solution you might code better one
+  // Keep in mind this is my solution you might code better one
   def combinationsCal(charList: List[Char]): List[List[Char]] = {
 
-    def recursionCombin(list: List[Char]): Set[List[Char]] = {
+    def recursionCombin(list: List[Char]): Set[List[Char]] =
       list match {
         case Nil         => Set(List())
         case head :: Nil => Set(List(head)) ++ recursionCombin(Nil)
@@ -174,7 +171,6 @@ object RecursionFun extends App {
             recursionCombin(second :: tail) ++
             recursionCombin(head :: list.tail.dropRight(1))
       }
-    }
 
     recursionCombin(charList).toList
   }

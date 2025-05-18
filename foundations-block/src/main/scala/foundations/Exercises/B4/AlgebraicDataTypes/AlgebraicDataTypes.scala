@@ -2,15 +2,15 @@ package foundations.Exercises.B4.AlgebraicDataTypes
 
 object AlgebraicDataTypes extends App {
 
-  //Sums And Products
+  // Sums And Products
 
-  //Sum Examples
+  // Sum Examples
 
   final case class Human(name: String)
 
   final case class Animal(name: String)
 
-  //Product Examples
+  // Product Examples
 
   sealed abstract class Spirits
 
@@ -18,7 +18,7 @@ object AlgebraicDataTypes extends App {
 
   case object Whiskey extends Spirits
 
-  //Hybrid Example
+  // Hybrid Example
 
   sealed trait Car {
     def model: String
@@ -28,7 +28,7 @@ object AlgebraicDataTypes extends App {
 
   final case class Jaguar(model: String) extends Car
 
-  //Type Class or Higher Kinded Type or Parametric Type
+  // Type Class or Higher Kinded Type or Parametric Type
   sealed trait OptionB[+A]
 
   object OptionB {
@@ -41,18 +41,17 @@ object AlgebraicDataTypes extends App {
     case object NoneB extends OptionB[Nothing]
   }
 
-  //List Example
+  // List Example
   sealed abstract class ListExample[+A]
 
   object ListExample {
 
-    final case class OneOrMore[+A](head: A, tail: ListExample[A])
-        extends ListExample[A] {}
+    final case class OneOrMore[+A](head: A, tail: ListExample[A]) extends ListExample[A] {}
 
     case object Last extends ListExample[Nothing] {}
   }
 
-  //Tree Example
+  // Tree Example
   sealed trait Tree[+A]
 
   object Tree {
@@ -62,21 +61,20 @@ object AlgebraicDataTypes extends App {
 
   }
 
-  //Either Exercise
-  //Either[+A,+B] takes 2 types
-  //Either is hybrid type
-  //Either can be Left[A] or Right[B] where both take a single type
-  //Either flatMap and map function handle the Right[B] case, so right is the nice path
+  // Either Exercise
+  // Either[+A,+B] takes 2 types
+  // Either is hybrid type
+  // Either can be Left[A] or Right[B] where both take a single type
+  // Either flatMap and map function handle the Right[B] case, so right is the nice path
 
-  //Try Exercise
-  //Try[+A] take 1 type
-  //Try is hybrid
-  //Try can be Success[A] or Failure[Exception] where one takes a generic type
-  //And Failure takes an Exception
+  // Try Exercise
+  // Try[+A] take 1 type
+  // Try is hybrid
+  // Try can be Success[A] or Failure[Exception] where one takes a generic type
+  // And Failure takes an Exception
 
+  // Try write Type Aliases for Option[A] using Either
 
-  //Try write Type Aliases for Option[A] using Either
-
-  //Try write Type Aliases for Try[A] using Either
+  // Try write Type Aliases for Try[A] using Either
 
 }

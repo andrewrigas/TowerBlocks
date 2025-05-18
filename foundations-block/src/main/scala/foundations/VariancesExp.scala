@@ -4,20 +4,20 @@ object VariancesExp extends App {
 
   sealed trait Option[A] // An invariant class
 
-  //Same level of abstraction
+  // Same level of abstraction
   object Option {
 
     final case class Some[A](value: A) extends Option[A]
 
-    //Cant create an object with a Generic Type
-    //case object None[A] extends Option[A]
+    // Cant create an object with a Generic Type
+    // case object None[A] extends Option[A]
   }
 
-  //val maybeValue: Option[Int] = Option.None
+  // val maybeValue: Option[Int] = Option.None
 
   sealed trait Option1[+A] // A covariant class
 
-  //I can accept subclasses
+  // I can accept subclasses
   object Option1 {
 
     final case class Some1[+A](value: A) extends Option1[A]
@@ -30,7 +30,7 @@ object VariancesExp extends App {
 
   sealed trait Option2[-A] // An invariant class
 
-  //I can accept superclasses
+  // I can accept superclasses
   object Option2 {
 
     final case class Some2[A](value: A) extends Option2[A]

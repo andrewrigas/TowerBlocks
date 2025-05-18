@@ -1,7 +1,7 @@
 package foundations.unit
 
+import foundations.Exercises.B2.FunctionalWay.FunctionalWay.*
 import foundations.base.FoundationsSpecBase
-import foundations.Exercises.B2.FunctionalWay.FunctionalWay._
 
 class FunctionalWaySpec extends FoundationsSpecBase {
 
@@ -9,7 +9,7 @@ class FunctionalWaySpec extends FoundationsSpecBase {
 
     "f11 and f12 should return + 1 on value" in {
 
-      val res11 = f11(2)
+      val res11      = f11(2)
       val res12: Int = f12(4)
 
       res11 shouldBe 3
@@ -41,13 +41,13 @@ class FunctionalWaySpec extends FoundationsSpecBase {
 
     "addition should return" in {}
 
-    //substraction
-    //multiplication
-    //division
+    // substraction
+    // multiplication
+    // division
 
     "optionExample should return 0 on None and Value on Some" in {
-      lazy val value = 5
-      lazy val noneCase = 0
+      lazy val value     = 5
+      lazy val noneCase  = 0
       lazy val someValue = Some(5)
       lazy val noneValue = None
 
@@ -58,11 +58,11 @@ class FunctionalWaySpec extends FoundationsSpecBase {
     "optionExample2 should" in {}
 
     "ListExamples " which {
-      lazy val head = 5
+      lazy val head    = 5
       lazy val nilCase = 0
-      lazy val list1 = Nil
-      lazy val list2 = List(head)
-      lazy val list3 = List(head, 6, 4)
+      lazy val list1   = Nil
+      lazy val list2   = List(head)
+      lazy val list3   = List(head, 6, 4)
 
       "listExample should return Head or 0" in {
 
@@ -78,7 +78,7 @@ class FunctionalWaySpec extends FoundationsSpecBase {
         listExample2(list3) shouldBe head
       }
 
-      //Remove ignore
+      // Remove ignore
       "listSum2RandomElements should return the sum of the first 2 elements" ignore {
         val list1 = List(3, 4)
         val list2 = List(1)

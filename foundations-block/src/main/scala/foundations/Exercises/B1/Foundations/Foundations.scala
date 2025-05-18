@@ -2,48 +2,48 @@ package foundations.Exercises.B1.Foundations
 
 object Foundations extends App {
 
-  val x = 14
+  val x         = 14
   val i: String = "Info"
-  var id = "Info"
-  var d: Int = 3
-  //var g
+  var id        = "Info"
+  var d: Int    = 3
+  // var g
 
   trait Trait
-  //Support multiple inheritance
-  //Allowed to add a trait to an object
-  //Does not contain constructor
+  // Support multiple inheritance
+  // Allowed to add a trait to an object
+  // Does not contain constructor
 
   abstract class AbstractClass()
-  //Does not support multiple inheritance
-  //Not allowed to add an abstract class to an object
-  //Contain constructor
+  // Does not support multiple inheritance
+  // Not allowed to add an abstract class to an object
+  // Contain constructor
 
   class Class()
 
   object Object
-  //Singleton Pattern
-  //Only one instance
+  // Singleton Pattern
+  // Only one instance
 
-  //Collections
+  // Collections
   val listExample: List[Int] = List(1, 2, 3)
 
   val listExample2: List[Int] = 1 :: 2 :: 3 :: Nil
 
-  //Unique Elements
+  // Unique Elements
   val setExample: Set[Int] = Set(1, 2, 3, 4, 3, 5)
 
-  //Map(key -> value) Unique Key , last key overrides the value of first one
+  // Map(key -> value) Unique Key , last key overrides the value of first one
   val mapExample: Map[Int, String] =
     Map(1 -> "1", 2 -> "2", (3, "3"), (1, "11"))
 
-  //Create a range, Useful for for-loops
+  // Create a range, Useful for for-loops
   val rangeExample: Range = 1 to 10
 
-  //println(listExample)
+  // println(listExample)
 
-  //println(setExample)
+  // println(setExample)
 
-  //println(mapExample)
+  // println(mapExample)
 
   for (i <- 1 to 10) {
     i
@@ -65,7 +65,7 @@ object Foundations extends App {
 
   //  println(flattenList)
 
-    println(s"y = $y")
+  println(s"y = $y")
 
   println(s"z = $z")
 
@@ -77,8 +77,8 @@ object Foundations extends App {
 
   def whatAmI = "I am lazy like anyone else"
 
-  //Type Aliased
-  type Key = String
+  // Type Aliased
+  type Key   = String
   type Value = (String, Int)
 
 }

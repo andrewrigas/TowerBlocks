@@ -9,52 +9,51 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.matching.Regex
 
-final case class Client private (host: String,port: Int) extends LazyLogging {
+final case class Client private (host: String, port: Int) extends LazyLogging {
 
   final case class IO(input: BufferedReader, output: PrintStream)
 
-  def makeRequest = {
-    while (true){
+  def makeRequest =
+    while (true) {
       val socket = connectToServer
-      val io = getIO(socket)
+      val io     = getIO(socket)
       Thread.sleep(1000)
-      Future{clientRequest(io,"Hello Server")}.onComplete(_ => socket.close())
+      Future(clientRequest(io, "Hello Server")).onComplete(_ => socket.close())
     }
-  }
 
   private def connectToServer = {
     logger.info(s"Client trying to connect to $host:$port")
-    val socket: Socket = new Socket(host,port)
+    val socket: Socket = new Socket(host, port)
     logger.info(s"Successful client connection with the server $host:$port")
     socket
   }
 
   private def getIO(socket: Socket): IO = {
-    //Hint
-    //Readers read characters
-    //Streams read bytes
+    // Hint
+    // Readers read characters
+    // Streams read bytes
 
-    //Output stream writes on the socket
+    // Output stream writes on the socket
     val outputStream: OutputStream = socket.getOutputStream
-    val myOutput: PrintStream = new PrintStream(outputStream)
+    val myOutput: PrintStream      = new PrintStream(outputStream)
 
-    //Input stream reads from the socket
+    // Input stream reads from the socket
     val inputStream: InputStream = socket.getInputStream
-    //InputStreamReader transform our inputStream to Chars
+    // InputStreamReader transform our inputStream to Chars
     val inputStreamReader: InputStreamReader = new InputStreamReader(inputStream)
-    //BufferReader read each char from inputStreamReader into a buffer
+    // BufferReader read each char from inputStreamReader into a buffer
     val myInput: BufferedReader = new BufferedReader(inputStreamReader)
 
-    IO(input = myInput,output = myOutput)
+    IO(input = myInput, output = myOutput)
   }
 
   private def clientRequest(io: IO, message: String): Unit = {
-    //Output stream writes on the socket
-    //Write on socket string message
+    // Output stream writes on the socket
+    // Write on socket string message
     io.output.println(message)
 
-    //Input stream reads from the socket
-    //Read a line from the server message
+    // Input stream reads from the socket
+    // Read a line from the server message
     val serverResponse: String = io.input.readLine()
     println(s"Server response: $serverResponse")
   }
@@ -75,7 +74,7 @@ object Client extends LazyLogging {
   }
 
   private def validateHost(host: String): String =
-    if(host.nonEmpty) host
+    if (host.nonEmpty) host
     else {
       logger.debug("Invalid host Name")
       throw new IllegalArgumentException(s"Invalid Host, should not be Empty")
@@ -87,6 +86,6 @@ object Client extends LazyLogging {
     new Client(validHost, validPort)
   }
 
-  def apply(host: String, port: Int): Client = Client(host,port.toString)
+  def apply(host: String, port: Int): Client = Client(host, port.toString)
 
 }

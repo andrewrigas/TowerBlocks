@@ -1,14 +1,13 @@
 package foundations.Exercises.B5.AdHocPolymorphism
 
-import AdHocPolymorphism.Human.{Maria, Trump}
+import foundations.Exercises.B5.AdHocPolymorphism.AdHocPolymorphism.Human.{Maria, Trump}
 
 object AdHocPolymorphism extends App {
 
-  implicit val ImplicitInt = 10
+  given Int = 10
 
-  def funcConcatStringInt(str: String)(implicit value: Int): String = {
+  def funcConcatStringInt(str: String)(implicit value: Int): String =
     str + value
-  }
 
   println(funcConcatStringInt("Ball "))
 
@@ -36,38 +35,36 @@ object AdHocPolymorphism extends App {
     }
   }
 
-  //Associate functionality with types
+  // Associate functionality with types
   trait Decoder[A] { self =>
     def decodeType: String
   }
 
   object Decoder {
-    import Human._
 
-    implicit val typeString = new Decoder[String] {
+    given typeString: Decoder[String] = new Decoder[String] {
       val decodeType: String = "String"
     }
 
-    implicit val typeInt = new Decoder[Int] {
+    given typeInt: Decoder[Int] = new Decoder[Int] {
       val decodeType: String = "Int"
     }
 
-    implicit val typeBool = new Decoder[Boolean] {
+    given typeBool: Decoder[Boolean] = new Decoder[Boolean] {
       val decodeType: String = "Bool"
     }
 
-    implicit val typeTrump = new Decoder[Trump] {
+    given typeTrump: Decoder[Trump] = new Decoder[Trump] {
       val decodeType: String = "Trump"
     }
 
-    implicit val typeMaria = new Decoder[Maria] {
+    given typeMaria: Decoder[Maria] = new Decoder[Maria] {
       val decodeType: String = "Maria"
     }
   }
 
-  def getTheType[A](implicit typeClass: Decoder[A]): String = {
+  def getTheType[A](implicit typeClass: Decoder[A]): String =
     typeClass.decodeType
-  }
 
 //  println(getTheType[String])
 //  println(getTheType[Int])
@@ -79,23 +76,21 @@ object AdHocPolymorphism extends App {
 
   object Food {
 
-    implicit val iAteMaria = new Food[Maria] {
+    given iAteMaria: Food[Maria] = new Food[Maria] {
       val iAte: String = "Steak"
     }
 
-    implicit val iAteTrump = new Food[Trump] {
+    given iAteTrump: Food[Trump] = new Food[Trump] {
       val iAte: String = "Poop"
     }
   }
 
-  def whoAmIwhatDidIAte[A](implicit food: Food[A],
-                           typeClass: Decoder[A]): String = {
+  def whoAmIwhatDidIAte[A](implicit food: Food[A], typeClass: Decoder[A]): String =
     "My name is " + getTheType[A] + " and I ate " + food.iAte
-  }
 
 //  println(whoAmIwhatDidIAte[Maria])
 //  println(whoAmIwhatDidIAte[Trump])
 
-  //Create an Ad Hoc Polymorphism
+  // Create an Ad Hoc Polymorphism
 
 }

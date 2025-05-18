@@ -1,22 +1,65 @@
-import scala.sys.process._
+import scala.sys.process.*
 
-//in This Build so all the Modules get same setting
-//try removing in ThisBuild run sbt and execute 'version' or 'scalaVersion'
-ThisBuild / name := "TowerBlocks"
-ThisBuild / scalaVersion := "2.13.10"
-ThisBuild / version := "git rev-parse --short HEAD".!!.trim
+lazy val enableScalaLint = sys.env.getOrElse("ENABLE_SCALA_LINT_ON_COMPILE", "true").toBoolean
 
-lazy val towerBlocks = Projects.root
-  .aggregate(modules: _*)
+// `Global` applies to modules (parent and child modules) the same settings
+Global / onChangedBuildSource := ReloadOnSourceChanges
 
-lazy val foundationsBlock = Projects.foundationsBlock
-  .settings(Dependencies.foundationsBlock)
+// `ThisBuild` applies to modules (only child modules) the same settings
+ThisBuild / scalaVersion              := "3.7.0"
+ThisBuild / version                   := "git rev-parse --short HEAD".!!.trim
+ThisBuild / scalafixOnCompile         := enableScalaLint
+ThisBuild / scalafmtOnCompile         := enableScalaLint
+ThisBuild / semanticdbVersion         := scalafixSemanticdb.revision
+ThisBuild / semanticdbEnabled         := true
+ThisBuild / Test / fork               := true
+ThisBuild / run / fork                := true
+ThisBuild / Test / parallelExecution  := true
+ThisBuild / Test / testForkedParallel := true
+
+def createProject(name: String, baseFile: String): Project =
+  Project(id = name, base = file(baseFile))
+    .settings(Settings.ScalaCompiler)
+    .settings(Aliases.all)
+
+lazy val towerBlocks = Project("TowerBlocks", file("."))
+  .aggregate(modules*)
+
+lazy val foundationsBlock = createProject(name = "FoundationsBlock", baseFile = "foundations-block")
   .dependsOn(servicesBlock)
+  .settings(
+    libraryDependencies ++= Seq(
+      Dependencies.scalaParallelCollections,
+      Dependencies.pureConfig,
+      Dependencies.scalaLogging,
+      Dependencies.sl4j,
+      Dependencies.scalaTest % Test, // 'Test' means that those deps will be only used in the test scope (`/test` file path)
+      Dependencies.scalaCheck % Test,
+    )
+  )
 
-lazy val fileWriterBlock = Projects.fileWriterBlock
-  .settings(Dependencies.fileWriterBlock)
+lazy val fileWriterBlock = createProject(name = "FileWriter", baseFile = "file-writer-block")
+  .settings(
+    libraryDependencies ++= Seq(
+      Dependencies.scalaParallelCollections,
+      Dependencies.pureConfig,
+      Dependencies.scalaLogging,
+      Dependencies.sl4j,
+      Dependencies.scalaTest % Test, // 'Test' means that those deps will be only used in the test scope (`/test` file path)
+      Dependencies.scalaCheck % Test,
+    )
+  )
 
-lazy val servicesBlock = Projects.servicesBlock
-  .settings(Dependencies.servicesBlock)
+lazy val servicesBlock = createProject(name = "ServicesBlock", baseFile = "services-block")
+  .settings(
+    libraryDependencies ++= Seq(
+      Dependencies.scalaParallelCollections,
+      Dependencies.pureConfig,
+      Dependencies.scalaLogging,
+      Dependencies.sl4j,
+      Dependencies.scalaTest % Test, // 'Test' means that those deps will be only used in the test scope (`/test` file path)
+      Dependencies.scalaCheck % Test,
+    )
+  )
 
 lazy val modules: Seq[ProjectReference] = Seq(foundationsBlock, servicesBlock, fileWriterBlock)
